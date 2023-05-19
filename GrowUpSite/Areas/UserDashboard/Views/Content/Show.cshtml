@@ -1,0 +1,79 @@
+﻿@model GrowUp.Model.Contentube
+<!-- Page Content-->
+<div class="page-content">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-right">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Crovex</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">UI Kit</a></li>
+                            <li class="breadcrumb-item active">Datatable</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Datatable</h4>
+                </div><!--end page-title-box-->
+            </div><!--end col-->
+        </div>
+        <!-- end page title end breadcrumb -->
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="header-title">Create New Servie</h4>
+                        <form method="post">
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label"> Content Url : </label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="channel-url" type="text" disabled asp-for="Content_Url">
+                                    <br />
+                                    <br />
+                                    <a class="btn btn-primary" id="search-button" style="color:aliceblue">Search</a>
+                                    <button class="btn btn-success float-right publish-button">Publish</button>
+                                </div>
+                            </div>
+
+                            <table id="video-table" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Thumbnail</th>
+                                        <th>Title</th>
+                                        <th>Link</th>
+                                        <th> <input type="checkbox" name="checkall" class="checkall" id="select-all-checkbox" /> </th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                            @* Add the following code to generate the URL for the SaveVideos action *@
+                            @if (Model != null && Model.Id != null)
+                            {
+                                <input type="hidden" id="content-id" value="@Model.Id" />
+                                <script>
+                                    var publishUrl = '@Url.Action("SaveVideos", "Content", new { area = "UserDashboard" })';
+                                </script>
+                            }
+                        </form>
+
+                    </div>
+                </div> <!-- end col -->
+            </div>
+        </div>
+
+      
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/site/dashboard/js/api.js"></script>
+    <script src="~/site/dashboard/js/publishAPI.js"></script>
+
+
+}

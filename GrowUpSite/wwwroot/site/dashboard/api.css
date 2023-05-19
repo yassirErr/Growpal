@@ -1,0 +1,26 @@
+﻿/* Style the checkboxes */
+input[type="checkbox"] {
+    transform: scale(1.5); /* Increase the size of the checkbox */
+    margin: 0 auto; /* Center the checkbox horizontally */
+    display: block; /* Make the checkbox a block element */
+}
+
+/* Style the table cells */
+td {
+    text-align: center; /* Center the contents of the cell */
+}
+
+/* Style the thumbnail images */
+td img {
+    width: 100px; /* Set the width to 100px */
+    height: auto; /* Automatically adjust the height */
+}
+
+/* Style the video title */
+.table td  {
+    font-size: 14px; /* Change the font size to 14px */
+    font-weight: bold; /* Add bold font weight */
+    color: #333; /* Change the text color to dark gray */
+    width: 300px; /* Set the width of the cell to 150px */
+    height: 40px; /* Set the height of the cell to 40px */
+}

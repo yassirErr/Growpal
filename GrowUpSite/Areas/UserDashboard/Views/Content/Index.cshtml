@@ -1,0 +1,75 @@
+﻿@model IEnumerable<GrowUp.Model.Contentube>
+
+<!-- Page Content-->
+<div class="page-content">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-right">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Crovex</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">UI Kit</a></li>
+                            <li class="breadcrumb-item active">Datatable</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Datatable</h4>
+                </div><!--end page-title-box-->
+            </div><!--end col-->
+        </div>
+        <!-- end page title end breadcrumb -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4 class="mt-0 header-title">Default Datatable</h4>
+                 
+
+                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Content Name</th>
+                                    <th>Content Url</th>
+                            
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var obj in Model)
+                                {
+                                    <tr>
+                                        <td>@obj.Content_name</td>
+                                        <td style="width:15px">@obj.Content_Url</td>
+                                   
+                                        <td>
+                                            <div class="button-items">
+                                                <a asp-controller="Content" asp-action="Show" asp-route-id="@obj.Id" class="btn btn-outline-secondary waves-effect waves-light"> Show  </a>
+                                                <a asp-controller="Content" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-outline-primary waves-effect waves-light"> Edit  </a>
+
+                                                <form id="delete-form" asp-controller="Content" asp-action="Delete" asp-route-id="@obj.Id" method="post">
+                                                    @Html.AntiForgeryToken()
+                                                    <button type="submit" class="btn btn-outline-danger waves-effect waves-light" onclick="return confirm('Are you sure you want to delete this content?')">Delete</button>
+                                                </form>
+
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                    
+                        </table>
+                     
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+    </div>
+</div>
+

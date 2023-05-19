@@ -1,0 +1,156 @@
+﻿@model GrowUp.Model.ViewModels.ContentVM
+
+<!-- Page Content-->
+<div class="page-content">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-right">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">GrowPal</a></li>
+                            <li class="breadcrumb-item active"> @(Model.Content.Id != 0 ? "Update" : "Create")Form Content</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Form Conetnt</h4>
+                </div><!--end page-title-box-->
+            </div><!--end col-->
+        </div>
+
+        <!-- end page title end breadcrumb -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title">Add Content</h4>
+                        <form method="post">
+                            <input asp-for="Content.Id" hidden/>
+                            <div class="row">
+                                <div class="col-lg-6">
+
+                                    <div class="form-group row">
+                                        <label asp-for="Content.Content_name" class="col-sm-2 col-form-label text-right">Name</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Content.Content_name" id="Content_name" class="form-control" placeholder="Content Name" />
+                                            <span asp-validation-for="Content.Content_name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label asp-for="Content.Description" class="col-sm-2 col-form-label text-right">Disc</label>
+                                        <div class="col-md-10">
+                                            <textarea class="form-control" rows="5" asp-for="Content.Description" placeholder="Discription"></textarea>                       
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label asp-for="Content.Content_Url"  class="col-sm-2 col-form-label text-right">URL</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="url" id="channel-url" placeholder="https://growpal.com" asp-for="Content.Content_Url">
+                                            <span asp-validation-for="Content.Content_Url" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label text-right">Select</label>
+                                        <div class="col-sm-10">
+                                            <select asp-for="Content.Category_typeId" id="Category_typeId" asp-items="@Model.CategoryListItem" class="form-control">
+                                                <option disabled selected>Selecet Category</option>
+                                            </select>
+                                            <span asp-validation-for="Content.Category_typeId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label text-right">Select</label>
+                                        <div class="col-sm-10">
+                                            <select asp-for="Content.Service_typeId" id="Service_typeId" asp-items="@Model.ServiceListItem" class="form-control">
+                                                <option disabled selected>Selecet Service</option>
+                                            </select>
+                                        </div>
+                                        <span asp-validation-for="Content.Service_typeId" class="text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label text-right">Select</label>
+                                        <div class="col-sm-10">
+                                            <select asp-for="Content.Country_nameId" id="Country_nameId" asp-items="@Model.ApplicationUserListItem" class="form-control">
+                                                <option disabled selected>Selecet Country name</option>
+                                            </select>
+                                            <span asp-validation-for="Content.Country_nameId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="float-right">
+
+                                <a asp-area="UserDashboard" asp-controller="User" asp-action="Index" class="btn btn-secondary mr-1" style="width:150x">
+                                    Back To the List
+                                </a>
+                                @if (Model.Content.Id !=0){
+                                    <button type="submit" class="btn btn-outline-warning dropdown-toggle" style="width:150px" value="search">Update</button>
+                                }else{
+                                    <button type="submit" onclick="return ValidateInput()" class="btn btn-outline-primary dropdown-toggle" style="width:150px" value="search">Create</button>
+                                }
+                              
+                                 
+                            
+                            </div>
+
+
+                        </form>
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div><!--end col-->
+        </div><!--end row-->
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+        function ValidateInput() {
+            // Define an array of input field IDs
+            var inputIds = ["Content_name", "channel-url", "Category_typeId", "Service_typeId", "Country_nameId"];
+
+            // Loop over the input field IDs and check their values
+            for (var i = 0; i < inputIds.length; i++) {
+                var inputId = inputIds[i];
+                var inputValue = document.getElementById(inputId).value;
+
+                // If the input value is empty, display an error message using SweetAlert
+                if (inputValue === "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Please fill in all required fields!',
+                    });
+
+                    // Stop the loop and prevent form submission
+                    return false;
+                }
+            }
+
+            // If all input fields have values, submit the form
+            document.forms["my-form"].submit();
+        }
+            
+
+    </script>
+    }

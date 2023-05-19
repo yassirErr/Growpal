@@ -1,0 +1,49 @@
+﻿@using GrowUp.Utility;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+
+<ul class="side-nav">
+  
+@if (SignInManager.IsSignedIn(User))
+{
+
+
+        @if (User.IsInRole(StaticDetail.Role_Admin))
+        { 
+        <li class="scroll-to-section">
+        <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="cmn-btn">
+            Go To Dashboard
+            <i class='bx bx-plus'></i>
+        </a>
+        </li>
+        }
+        else{
+        <li class="scroll-to-section">
+            <a asp-area="UserDashboard" asp-controller="User" asp-action="Index" class="cmn-btn">
+                Start Project
+                <i class='bx bx-plus'></i>
+            </a>
+        </li>
+        }
+}
+else
+{
+
+   
+            <a class="left-btn" id="login" asp-area="Identity" asp-page="/Account/Login">
+       
+
+                <i class='bx bx-log-out' ></i>
+                Login
+            </a>
+            <a class="cmn-btn" id="register" asp-area="Identity" asp-page="/Account/Register">
+                Register
+                <i class='bx bx-plus'></i>
+            </a>
+
+       
+}
+</ul>
