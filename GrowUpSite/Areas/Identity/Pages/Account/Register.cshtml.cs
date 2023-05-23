@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
@@ -156,8 +157,9 @@ namespace GrowUpSite.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+               
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                user.UserName = new MailAddress(Input.Email).User; // it take The first part from email 
                 user.Name = Input.Name;
                 user.PhoneNumber = Input.PhoneNumber;
                 user.County = Input.County;

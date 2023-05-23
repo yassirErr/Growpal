@@ -117,11 +117,15 @@ namespace GrowUpSite.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            await _signInManager.RefreshSignInAsync(user);
+
+            // Sign the user out
+            await _signInManager.SignOutAsync();
+
             _logger.LogInformation("User changed their password successfully.");
             StatusMessage = "Your password has been changed.";
 
-            return RedirectToPage();
+            // Redirect the user to the login page
+            return RedirectToPage("/Account/Login", new { returnUrl = "~/" });
         }
     }
 }

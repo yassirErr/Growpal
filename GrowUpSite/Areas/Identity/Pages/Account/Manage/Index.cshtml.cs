@@ -6,6 +6,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using GrowUp.DataAccess.Data;
+using GrowUp.DataAccess.Repository.IRepository;
+using GrowUp.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,6 +17,8 @@ namespace GrowUpSite.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
+
+
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
@@ -23,6 +28,7 @@ namespace GrowUpSite.Areas.Identity.Pages.Account.Manage
         {
             _userManager = userManager;
             _signInManager = signInManager;
+    
         }
 
         /// <summary>
@@ -35,6 +41,9 @@ namespace GrowUpSite.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        /// 
+
+        public string PhoneNumber { get; set; }
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -51,18 +60,28 @@ namespace GrowUpSite.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public class InputModel
         {
+    
+            public string UserName { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+      
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
         }
 
         private async Task LoadAsync(IdentityUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
+
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
@@ -93,13 +112,34 @@ namespace GrowUpSite.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
+         
+
             if (!ModelState.IsValid)
             {
                 await LoadAsync(user);
                 return Page();
             }
 
+
+
+           // updated
+            var userName = user.UserName;
+
+            if (Input.UserName != userName)
+            {
+                user.UserName = Input.UserName;
+                var setUserNameResult = await _userManager.UpdateAsync(user);
+                //var setUserNameResult = await _userManager.SetUserNameAsync(user, Input.UserName);
+                if (!setUserNameResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set  User Name.";
+                    return RedirectToPage();
+                }
+
+            }
+
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
@@ -108,7 +148,9 @@ namespace GrowUpSite.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+
             }
+
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

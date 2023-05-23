@@ -3,13 +3,13 @@
 @{
     ViewData["Title"] = "Manage Email";
     ViewData["ActivePage"] = ManageNavPages.Email;
+    Layout = "~/Areas/Identity/Pages/_EditEmailLayout.cshtml";
 }
 
 <h3>@ViewData["Title"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="email-form" method="post">
+
+            <form id="email-form" class="form-horizontal form-material mb-0" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             @if (Model.IsEmailConfirmed)
             {
@@ -21,6 +21,7 @@
                     <label asp-for="Email" class="form-label"></label>
                 </div>
             }
+
             else
             {
                 <div class="form-floating">
@@ -36,8 +37,8 @@
             </div>
             <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-100 btn btn-lg btn-primary">Change email</button>
         </form>
-    </div>
-</div>
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -159,9 +159,9 @@
                         <span class="ml-1 nav-user-name hidden-sm">Welcome, @User.Identity.Name! <i class="mdi mdi-chevron-down"></i> </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" asp-area="UserDashboard" asp-controller="Profile" asp-action="EditUser"><i class="ti-user text-muted mr-2"></i> Profile</a>
-                   
-                       
+
+                        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-primary"> <i class="ti-user text-muted mr-2"></i>Settings</a>
+                     
                   
                         <div class="dropdown-divider mb-0"></div>
                         
@@ -199,6 +199,7 @@
                     <li class="nav-item"><a class="nav-link" asp-area="UserDashboard" asp-action="Upsert" asp-controller="Content"><i class="ti-control-record"></i>Add your content</a></li>
                  
                   <li class="nav-item"><a class="nav-link" asp-area="UserDashboard" asp-action="Index" asp-controller="Content"><i class="ti-control-record"></i>All Content</a></li>
+                   
                 </ul>
             </li>
 
