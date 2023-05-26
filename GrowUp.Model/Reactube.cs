@@ -30,5 +30,6 @@ namespace GrowUp.Model
 
         public bool Status { get; set; }
 
+
     }
 }

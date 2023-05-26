@@ -91,6 +91,10 @@ namespace GrowUp.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("ContentId")
                         .HasColumnType("int");
 
@@ -102,6 +106,8 @@ namespace GrowUp.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ContentId");
 
@@ -382,11 +388,19 @@ namespace GrowUp.DataAccess.Migrations
 
             modelBuilder.Entity("GrowUp.Model.Reactube", b =>
                 {
+                    b.HasOne("GrowUp.Model.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("GrowUp.Model.Contentube", "Content")
                         .WithMany()
                         .HasForeignKey("ContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Content");
                 });
