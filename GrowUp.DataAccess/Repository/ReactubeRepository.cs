@@ -20,6 +20,16 @@ namespace GrowUp.DataAccess.Repository
             _db = db;
         }
 
+        public int Count(Expression<Func<Reactube, bool>> filter = null)
+        {
+            IQueryable<Reactube> query = _db.Set<Reactube>();
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            return query.Count();
+        }
+
         public void Update(Reactube obj)
         {
             _db.Reactubes.Update(obj);

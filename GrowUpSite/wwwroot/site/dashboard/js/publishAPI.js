@@ -14,6 +14,7 @@ $('.publish-button').click(function () {
             videoIds: videoIds
         },
         success: function (result) {
+      
             alert('Videos saved successfully!');
         },
         error: function (xhr, status, error) {

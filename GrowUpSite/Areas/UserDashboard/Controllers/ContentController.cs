@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Hosting;
+using NuGet.Protocol;
 using System.Data;
+using System.Diagnostics;
 using System.Security.Claims;
 
 namespace GrowUpSite.Areas.UserDashboard.Controllers
@@ -27,7 +29,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
         public IActionResult Index()
         {
-      
+
 
             // get the ID of the current user
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -36,7 +38,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             IEnumerable<Contentube> objContentList = _unitOfWork.Content.GetAll().Where(c => c.Country_nameId == userId);
 
             return View(objContentList);
-
 
         }
 
@@ -163,6 +164,54 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
             // Return an error if no videos were selected
             return BadRequest("No videos were selected.");
+        }
+
+
+
+        private string GetCurrentUserId()
+        {
+            return User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        public IActionResult Playlistube()
+        {
+            
+            string currentUserId = GetCurrentUserId();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            int userReactubeCount = _unitOfWork.Reactube.Count(
+            r => r.Content.Country_nameId == currentUserId);
+
+            if (userId != null)
+            {
+                // Get the Category_typeId and Service_typeId of the current user's Contentube record
+                int categoryTypeId = _unitOfWork.Content.GetFirstOrDefault(c => c.Country_nameId == currentUserId)?.Category_typeId ?? 0;
+                int serviceTypeId = _unitOfWork.Content.GetFirstOrDefault(c => c.Country_nameId == currentUserId)?.Service_typeId ?? 0;
+
+                // Get the Reactube records for the current content that have the same Category_typeId and Service_typeId,
+                // exclude the ones where ItemVideo is equal to currentUserId,
+                // and exclude the ones where the Content's ApplicationUser is equal to currentUserId
+                IEnumerable<Reactube> reactubeList = _unitOfWork.Reactube.GetAll(
+                   r => r.Content.Category_typeId == categoryTypeId &&
+                   r.Content.Service_typeId == serviceTypeId &&
+                   r.ItemVideo != currentUserId &&
+                   r.Content.Country_nameId != currentUserId,
+                   includeProperties: "Content"
+               ).OrderBy(r => r.Id).Take(userReactubeCount);
+
+                // Get the count of Reactube records for the current content where ItemVideo is equal to currentUserId
+                int itemCount = _unitOfWork.Reactube.Count(
+                    r => r.Content.Category_typeId == categoryTypeId &&
+                    r.Content.Service_typeId == serviceTypeId &&
+                    r.ItemVideo == currentUserId &&
+                    r.Content.Country_nameId != currentUserId
+                );
+
+                // Pass the reactubeList and itemCount to the view using a tuple
+                var model = (reactubeList, itemCount);
+                return View(model);
+            }
+            return RedirectToAction("Index");
         }
 
 

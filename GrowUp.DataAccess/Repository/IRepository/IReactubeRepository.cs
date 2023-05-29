@@ -10,6 +10,7 @@ namespace GrowUp.DataAccess.Repository.IRepository
 {
     public interface IReactubeRepository : IRepository<Reactube>
     {
+        int Count(Expression<Func<Reactube, bool>> filter = null);
         void Update(Reactube obj);
     }
 
