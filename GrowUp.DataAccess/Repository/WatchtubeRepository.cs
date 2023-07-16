@@ -11,20 +11,21 @@ using System.Threading.Tasks;
 
 namespace GrowUp.DataAccess.Repository
 {
-   
 
-    public class ReactubeRepository : Repository<Reactube>, IReactubeRepository
+
+    public class WatchtubeRepository : Repository<Watchtube>, IWatchtubeRepository
     {
         private AppDbContext _db;
 
-        public ReactubeRepository(AppDbContext db) : base(db)
+        public WatchtubeRepository(AppDbContext db) : base(db)
         {
             _db = db;
         }
 
-        public int Count(Expression<Func<Reactube, bool>> filter = null)
+
+        public int Count(Expression<Func<Watchtube, bool>> filter = null)
         {
-            IQueryable<Reactube> query = _db.Set<Reactube>();
+            IQueryable<Watchtube> query = _db.Set<Watchtube>();
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -32,9 +33,10 @@ namespace GrowUp.DataAccess.Repository
             return query.Count();
         }
 
-        public void Update(Reactube obj)
+
+        public void Update(Watchtube obj)
         {
-            _db.Reactubes.Update(obj);
+            _db.Watchtubes.Update(obj);
         }
     }
 

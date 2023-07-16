@@ -13,7 +13,7 @@ namespace GrowUp.DataAccess.Repository.IRepository
             IContentubeRepository Content { get; }
             IApplicationUserRepository ApplicationUser { get; }
             IReactubeRepository Reactube { get; }
-
+        IWatchtubeRepository Watchtube { get; }
 
         void Save();
     }

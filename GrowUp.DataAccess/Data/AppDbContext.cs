@@ -26,6 +26,7 @@ namespace GrowUp.DataAccess.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Contentube> Contentubes { get; set; }
         public DbSet<Reactube> Reactubes { get; set; }
+        public DbSet<Watchtube> Watchtubes { get; set; }
 
 
 

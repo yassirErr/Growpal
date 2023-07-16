@@ -21,15 +21,16 @@ namespace GrowUp.DataAccess.Repository
             Content = new ContentubeRepository(db);
             ApplicationUser = new ApplicationUserRepository(db);
             Reactube = new ReactubeRepository(db);
+            Watchtube = new WatchtubeRepository(db);
         }
 
         public ICategoryRepository Category { get; private set;}
         public IServiceRepository Service { get; private set; }
 
-
         public IContentubeRepository Content { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IReactubeRepository Reactube { get; private set; }
+        public IWatchtubeRepository Watchtube { get; private set; }
 
         public void Save()
         {

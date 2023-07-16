@@ -1,6 +1,4 @@
-﻿using GrowUp.DataAccess.Data;
-using GrowUp.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using GrowUp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace GrowUp.DataAccess.Repository.IRepository
 {
-    public interface IContentubeRepository : IRepository<Contentube>
+    public interface IWatchtubeRepository : IRepository<Watchtube>
     {
-
-        void Update(Contentube obj);
+        int Count(Expression<Func<Watchtube, bool>> filter = null);
+        void Update(Watchtube obj);
     }
+
 
 }

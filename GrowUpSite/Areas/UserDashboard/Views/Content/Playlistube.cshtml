@@ -1,4 +1,10 @@
-﻿@model (IEnumerable<Reactube> reactubeList, int itemCount)
+﻿@model (IEnumerable<GrowUp.Model.Reactube> ReactubeList, int ItemCount)
+
+
+@{
+    ViewData["Title"] = "Playlistube";
+}
+
 
 <div class="page-content">
 
@@ -28,24 +34,31 @@
                         <div class="card-body">
 
                             <div class="table-responsive">
-                                <table class="table mb-0">
-                                    <thead class="thead-light">
+
+                                <table id="video-table" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
                                         <tr>
                                             <th>Content Name</th>
-
-                                            <th>Link</th>
+                                            <th>Links</th>
+                                            <th>show</th>
                                         </tr>
+
                                     </thead>
-                                    @foreach (var obj in Model.reactubeList)
+                                  @foreach (var obj in Model.ReactubeList)
+        
                                     {
-                                    <tbody>
-                                        <tr>
-                                       
-                                            <td>@obj.Content.Content_name</td>
+                                        <tbody>
+                                            <tr>
+                                                <td>@obj.Content.Content_name</td>
 
-                                            <td><a class="btn btn-primary mb-3" type="button" href="https://www.youtube.com/watch?v=@obj.ItemVideo" target="_blank">View Video</a></td>
-                                        </tr>
-                                    </tbody>
+                                                <td>@obj.ItemVideo</td>
+
+                                                <td>
+                                                    <a class="btn btn-primary" onclick="handleClick(@obj.Id, '@obj.ItemVideo')" id="view-video-btn">Details</a>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
                                     }
                                 </table><!--end /table-->
                             </div><!--end /tableresponsive-->
@@ -59,3 +72,21 @@
         </div><!--end col-->
     </div>
 </div>
+
+
+
+<script>
+    function handleClick(reactubeId, videoLink) {
+        $.ajax({
+            url: '@Url.Action("AddToWatchtube", "Content")',
+            type: 'POST',
+            data: { reactubeId: reactubeId, videoLink: videoLink },
+            success: function (data) {
+                alert("Video added to Watchtube");
+            },
+            error: function () {
+                alert("Error: Failed to add video to Watchtube");
+            }
+        });
+    }
+</script>

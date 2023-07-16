@@ -37,7 +37,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             IEnumerable<Contentube> contentubes = _db.Content.GetAll(includeProperties: "Category,Service");
 
             // Filter out the data for the currently logged in user
-            contentubes = contentubes.Where(c => c.Country_nameId != currentUserId);
+            //contentubes = contentubes.Where(c => c.Country_nameId != currentUserId);
 
             // Pass the data to the view for display
             return View(contentubes);

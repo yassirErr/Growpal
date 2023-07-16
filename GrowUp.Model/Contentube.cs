@@ -46,8 +46,6 @@ namespace GrowUp.Model
         public Service Service { get; set; }
 
 
-
-        [Required]
         [Display(Name = "Country name")]
         public string Country_nameId { get; set; }
         [ValidateNever]

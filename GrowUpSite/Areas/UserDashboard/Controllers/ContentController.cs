@@ -2,12 +2,14 @@
 using GrowUp.Model;
 using GrowUp.Model.ViewModels;
 using GrowUp.Utility;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using NuGet.Protocol;
 using System.Data;
 using System.Diagnostics;
@@ -161,7 +163,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
                 return Ok();
             }
-
             // Return an error if no videos were selected
             return BadRequest("No videos were selected.");
         }
@@ -175,7 +176,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
         public IActionResult Playlistube()
         {
-            
+
             string currentUserId = GetCurrentUserId();
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -213,6 +214,29 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+
+        [HttpPost]
+        public IActionResult AddToWatchtube(int reactubeId, string videoLink)
+        {
+            var currentUserId = GetCurrentUserId();
+            var content = _unitOfWork.Reactube.GetFirstOrDefault(r => r.Id == reactubeId, includeProperties: "Content");
+            var watchtube = new Watchtube
+            {
+                ContentId = content.ContentId,
+                ApplicationUserId = currentUserId,
+                ReactubeId = reactubeId,
+                Date = DateTime.Now,
+                VideoLink = videoLink
+            };
+            _unitOfWork.Watchtube.Add(watchtube);
+            _unitOfWork.Save();
+            return Json(new { success = true });
+        }
+
+
+
 
 
         //POST

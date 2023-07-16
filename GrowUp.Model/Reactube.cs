@@ -12,10 +12,7 @@ namespace GrowUp.Model
 {
     public class Reactube
     {
-
-        [Key]
         public int Id { get; set; }
-
 
         [Required]
         [Display(Name = "Content link")]
@@ -29,7 +26,6 @@ namespace GrowUp.Model
         public string ItemVideo { get; set; }
 
         public bool Status { get; set; }
-
 
     }
 }
