@@ -13,7 +13,7 @@ namespace GrowUp.DataAccess.Repository
 {
 
 
-    public class WatchtubeRepository : Repository<Watchtube>, IWatchtubeRepository
+    public class WatchtubeRepository : Repository<Watchtube>,IWatchtubeRepository
     {
         private AppDbContext _db;
 

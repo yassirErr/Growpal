@@ -40,7 +40,7 @@
                                         <tr>
                                             <th>Content Name</th>
                                             <th>Links</th>
-                                            <th>show</th>
+                                        
                                         </tr>
 
                                     </thead>
@@ -51,12 +51,11 @@
                                             <tr>
                                                 <td>@obj.Content.Content_name</td>
 
-                                                <td>@obj.ItemVideo</td>
-
+                         
                                                 <td>
-                                                    <a class="btn btn-primary" onclick="handleClick(@obj.Id, '@obj.ItemVideo')" id="view-video-btn">Details</a>
+                                                    <a class="btn btn-primary" type="button" href="https://www.youtube.com/watch?v=@obj.ItemVideo" target="_blank" id="view-video-btn" onclick="handleClick(@obj.Id, '@obj.ItemVideo')">View Video</a>
                                                 </td>
-
+                                                
                                             </tr>
                                         </tbody>
                                     }
@@ -67,6 +66,10 @@
                 </div> <!-- end col -->
 
 
+
+             
+
+                
 
             </div><!--end page-title-box-->
         </div><!--end col-->
@@ -82,6 +85,19 @@
             type: 'POST',
             data: { reactubeId: reactubeId, videoLink: videoLink },
             success: function (data) {
+                // find the button element
+                var button = document.getElementById('view-video-btn');
+
+                // create a new element for the success message
+                var successMessage = document.createElement('div');
+                successMessage.className = 'alert icon-custom-alert alert-outline-success alert-success-shadow';
+                successMessage.role = 'alert';
+                successMessage.innerHTML = '<i class="mdi mdi-check-all alert-icon"></i><div class="alert-text"><strong>Well done!</strong></div>';
+
+                // replace the button with the success message
+                button.parentNode.replaceChild(successMessage, button);
+
+                // show an alert message
                 alert("Video added to Watchtube");
             },
             error: function () {

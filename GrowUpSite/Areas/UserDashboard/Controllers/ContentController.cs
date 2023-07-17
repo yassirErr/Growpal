@@ -153,7 +153,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                     {
                         Content = content,
                         ItemVideo = videoId,
-                        Status = true
+                        Status = false
                     };
 
                     _unitOfWork.Reactube.Add(reactube);
@@ -176,12 +176,11 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
         public IActionResult Playlistube()
         {
-
             string currentUserId = GetCurrentUserId();
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             int userReactubeCount = _unitOfWork.Reactube.Count(
-            r => r.Content.Country_nameId == currentUserId);
+                r => r.Content.Country_nameId == currentUserId);
 
             if (userId != null)
             {
@@ -191,14 +190,16 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
                 // Get the Reactube records for the current content that have the same Category_typeId and Service_typeId,
                 // exclude the ones where ItemVideo is equal to currentUserId,
-                // and exclude the ones where the Content's ApplicationUser is equal to currentUserId
+                // exclude the ones where the Content's ApplicationUser is equal to currentUserId,
+                // and include only the ones where Status is false
                 IEnumerable<Reactube> reactubeList = _unitOfWork.Reactube.GetAll(
-                   r => r.Content.Category_typeId == categoryTypeId &&
-                   r.Content.Service_typeId == serviceTypeId &&
-                   r.ItemVideo != currentUserId &&
-                   r.Content.Country_nameId != currentUserId,
-                   includeProperties: "Content"
-               ).OrderBy(r => r.Id).Take(userReactubeCount);
+                    r => r.Content.Category_typeId == categoryTypeId &&
+                    r.Content.Service_typeId == serviceTypeId &&
+                    r.ItemVideo != currentUserId &&
+                    r.Content.Country_nameId != currentUserId &&
+                    r.Status == false,
+                    includeProperties: "Content"
+                ).OrderBy(r => r.Id).Take(userReactubeCount);
 
                 // Get the count of Reactube records for the current content where ItemVideo is equal to currentUserId
                 int itemCount = _unitOfWork.Reactube.Count(
@@ -221,10 +222,16 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         public IActionResult AddToWatchtube(int reactubeId, string videoLink)
         {
             var currentUserId = GetCurrentUserId();
-            var content = _unitOfWork.Reactube.GetFirstOrDefault(r => r.Id == reactubeId, includeProperties: "Content");
+            var reactube = _unitOfWork.Reactube.GetFirstOrDefault(r => r.Id == reactubeId);
+            if (reactube == null)
+            {
+                return Json(new { success = false, message = "Reactube not found" });
+            }
+            reactube.Status = true;
+            _unitOfWork.Reactube.Update(reactube);
             var watchtube = new Watchtube
             {
-                ContentId = content.ContentId,
+                ContentId = reactube.ContentId,
                 ApplicationUserId = currentUserId,
                 ReactubeId = reactubeId,
                 Date = DateTime.Now,
@@ -234,9 +241,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             _unitOfWork.Save();
             return Json(new { success = true });
         }
-
-
-
 
 
         //POST
@@ -255,7 +259,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             _unitOfWork.Save();
             TempData["success"] = "Content Deleted successfully";
             return RedirectToAction("Index");
-
 
         }
     }
