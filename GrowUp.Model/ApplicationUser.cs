@@ -14,8 +14,16 @@ namespace GrowUp.Model
     {
         [Required]
         public string Name { get; set; }
-        public string County{ get; set; }
+
+
         public string PostalCode{ get; set; }
+
+
+        [Display(Name = "County Name")]
+        public int CountyNameId { get; set; }
+        [ForeignKey("CountyNameId")]
+        [ValidateNever]
+        public Country Country { get; set; }
 
 
     }

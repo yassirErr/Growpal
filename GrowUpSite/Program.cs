@@ -69,9 +69,7 @@ app.MapControllerRoute(
     );
 
 
-//app.MapControllerRoute(
-//        name: "AddVideoRoute",
-//        pattern: "{area=UserDashboard}/{controller=Content}/{action=AddVideoDetails}/{id?}");
+
 
 
 app.Run();

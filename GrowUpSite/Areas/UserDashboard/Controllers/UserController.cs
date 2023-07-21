@@ -37,24 +37,13 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             IEnumerable<Contentube> contentubes = _db.Content.GetAll(includeProperties: "Category,Service");
 
             // Filter out the data for the currently logged in user
-            //contentubes = contentubes.Where(c => c.Country_nameId != currentUserId);
+            contentubes = contentubes.Where(c => c.ApplicationUserId != currentUserId);
 
             // Pass the data to the view for display
             return View(contentubes);
 
-
         }
 
-        public IActionResult Details(int contentId)
-        {
-            if (contentId > 0)
-            {
-                IEnumerable<Reactube> reactubeList = _db.Reactube.GetAll(r => r.ContentId == contentId, includeProperties: "Content");
-                return View(reactubeList);
-            }
-
-            return NotFound();
-        }
 
     }
 

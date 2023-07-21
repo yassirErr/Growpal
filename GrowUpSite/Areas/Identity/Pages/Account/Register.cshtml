@@ -42,10 +42,14 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
+                                           
+
                                             <div class="form-group">
-                                                <input asp-for="Input.County" class="form-control" aria-required="true" placeholder="County" />
-                                                <span asp-validation-for="Input.County" class="text-danger"></span>
+                                                <select asp-for="Input.CountyNameId" asp-items="@Model.Input.CountryList" class="form-select">
+                                                    <option disabled selected> - Select Country - </option>
+                                                </select>
                                             </div>
+
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">

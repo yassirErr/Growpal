@@ -1,4 +1,7 @@
 ﻿@model GrowUp.Model.ViewModels.ContentVM
+@using Microsoft.AspNet.Identity;
+
+
 
 <!-- Page Content-->
 <div class="page-content">
@@ -10,11 +13,11 @@
                 <div class="page-title-box">
                     <div class="float-right">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">GrowPal</a></li>
-                            <li class="breadcrumb-item active"> @(Model.Content.Id != 0 ? "Update" : "Create")Form Content</li>
+                            <li class="breadcrumb-item"><a asp-area="UserDashboard" asp-controller="User" asp-action="index">GrowPal</a></li>
+                            <li class="breadcrumb-item active"> @(Model.Content.Id != 0 ? "Update" : "Create") New Content</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Form Conetnt</h4>
+                    <h4 class="page-title">Content Form</h4>
                 </div><!--end page-title-box-->
             </div><!--end col-->
         </div>
@@ -26,7 +29,9 @@
                     <div class="card-body">
                         <h4 class="mt-0 header-title">Add Content</h4>
                         <form method="post">
-                            <input asp-for="Content.Id" hidden/>
+                            <input asp-for="Content.Id" hidden />
+                            <input type="hidden" asp-for="Content.ApplicationUserId" value="@User.Identity.GetUserId()" />
+
                             <div class="row">
                                 <div class="col-lg-6">
 
@@ -34,20 +39,20 @@
                                         <label asp-for="Content.Content_name" class="col-sm-2 col-form-label text-right">Name</label>
                                         <div class="col-sm-10">
                                             <input asp-for="Content.Content_name" id="Content_name" class="form-control" placeholder="Content Name" />
-                                            <span asp-validation-for="Content.Content_name" class="text-danger"></span>
+                                            <span asp-validation-for="Content.Content_name" class="text-danger"></span> <!-- add this line -->
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <label asp-for="Content.Description" class="col-sm-2 col-form-label text-right">Disc</label>
                                         <div class="col-md-10">
-                                            <textarea class="form-control" rows="5" asp-for="Content.Description" placeholder="Discription"></textarea>                       
+                                            <textarea class="form-control" rows="5" asp-for="Content.Description" placeholder="Discription"></textarea>
                                         </div>
                                     </div>
 
 
                                     <div class="form-group row">
-                                        <label asp-for="Content.Content_Url"  class="col-sm-2 col-form-label text-right">URL</label>
+                                        <label asp-for="Content.Content_Url" class="col-sm-2 col-form-label text-right">URL</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="url" id="channel-url" placeholder="https://growpal.com" asp-for="Content.Content_Url">
                                             <span asp-validation-for="Content.Content_Url" class="text-danger"></span>
@@ -83,7 +88,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label text-right">Select</label>
                                         <div class="col-sm-10">
-                                            <select asp-for="Content.Country_nameId" id="Country_nameId" asp-items="@Model.ApplicationUserListItem" class="form-control">
+                                            <select asp-for="Content.Country_nameId" id="Country_nameId" asp-items="@Model.CountryListItem" class="form-control">
                                                 <option disabled selected>Selecet Country name</option>
                                             </select>
                                             <span asp-validation-for="Content.Country_nameId" class="text-danger"></span>
@@ -100,15 +105,16 @@
                                 <a asp-area="UserDashboard" asp-controller="User" asp-action="Index" class="btn btn-secondary mr-1" style="width:150x">
                                     Back To the List
                                 </a>
-                                @if (Model.Content.Id !=0){
+                                @if (Model.Content.Id != 0)
+                                {
                                     <button type="submit" class="btn btn-outline-warning dropdown-toggle" style="width:150px" value="search">Update</button>
-                                }else{
+                                }
+                                else
+                                {
                                     <button type="submit" onclick="return ValidateInput()" class="btn btn-outline-primary dropdown-toggle" style="width:150px" value="search">Create</button>
                                 }
-                              
-                                 
-                            
-                            </div>
+
+
 
 
                         </form>
@@ -150,7 +156,7 @@
             // If all input fields have values, submit the form
             document.forms["my-form"].submit();
         }
-            
+
 
     </script>
     }

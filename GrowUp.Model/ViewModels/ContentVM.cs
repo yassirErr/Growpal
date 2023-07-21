@@ -14,7 +14,8 @@ namespace GrowUp.Model.ViewModels
         public Contentube Content { get; set; }
 
 
-
+        [ValidateNever]
+        public IEnumerable<SelectListItem> CountryListItem { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> ServiceListItem { get; set; }
 

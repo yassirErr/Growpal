@@ -11,9 +11,10 @@ namespace GrowUp.DataAccess.Repository.IRepository
             ICategoryRepository Category { get; }
             IServiceRepository Service { get; }
             IContentubeRepository Content { get; }
+            ICountryRepository Country { get; }
             IApplicationUserRepository ApplicationUser { get; }
             IReactubeRepository Reactube { get; }
-        IWatchtubeRepository Watchtube { get; }
+            IWatchtubeRepository Watchtube { get; }
 
         void Save();
     }

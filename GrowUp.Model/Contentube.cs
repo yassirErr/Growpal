@@ -37,7 +37,6 @@ namespace GrowUp.Model
         public Category Category { get; set; }
 
     
-
         [Required]
         [Display(Name = "Service type")]
         public int Service_typeId { get; set; }
@@ -47,10 +46,18 @@ namespace GrowUp.Model
 
 
         [Display(Name = "Country name")]
-        public string Country_nameId { get; set; }
+        public int Country_nameId { get; set; }
         [ValidateNever]
         [ForeignKey("Country_nameId")]
+        public Country Country { get; set; }
+
+
+        public string ApplicationUserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+
+
 
     }
 }

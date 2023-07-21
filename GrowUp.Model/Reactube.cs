@@ -25,6 +25,11 @@ namespace GrowUp.Model
         [Display(Name = "Video Item")]
         public string ItemVideo { get; set; }
 
+        public string ApplicationUserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
+        [ValidateNever]
+        public ApplicationUser ApplicationUser { get; set; }
+
         public bool Status { get; set; }
 
     }

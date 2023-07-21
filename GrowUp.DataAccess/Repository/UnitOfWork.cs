@@ -19,6 +19,7 @@ namespace GrowUp.DataAccess.Repository
             Category = new CategoryRepository(db);
             Service = new ServiceRepository(db);
             Content = new ContentubeRepository(db);
+            Country = new CountryRepository(db);
             ApplicationUser = new ApplicationUserRepository(db);
             Reactube = new ReactubeRepository(db);
             Watchtube = new WatchtubeRepository(db);
@@ -28,6 +29,7 @@ namespace GrowUp.DataAccess.Repository
         public IServiceRepository Service { get; private set; }
 
         public IContentubeRepository Content { get; private set; }
+        public ICountryRepository Country { get; private set; }
         public IApplicationUserRepository ApplicationUser { get; private set; }
         public IReactubeRepository Reactube { get; private set; }
         public IWatchtubeRepository Watchtube { get; private set; }

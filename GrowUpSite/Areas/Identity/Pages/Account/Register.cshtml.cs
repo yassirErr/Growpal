@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -115,18 +116,25 @@ namespace GrowUpSite.Areas.Identity.Pages.Account
             public string Name { get; set; }
             [Required]
             public string? PhoneNumber { get; set; }
-            [Required]
-            public string? County { get; set; }
+          
+      
             [Required]
             public string? PostalCode { get; set; }
             public string? Role { get; set; }
             public int? CompanyId { get; set; }
+
+            [Display(Name = "County Name")]
+            public int CountyNameId { get; set; }
+            [ForeignKey("CountyNameId")]
+            [ValidateNever]
+            public Country Country { get; set; }
 
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyList { get; set; }
+            public IEnumerable<SelectListItem> CountryList { get; set; }
         }
 
 
@@ -143,7 +151,11 @@ namespace GrowUpSite.Areas.Identity.Pages.Account
                     Text = i,
                     Value = i
                 }),
-           
+                CountryList = _unitOfWork.Country.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.CountryName,
+                    Value = i.id.ToString()
+                }),
             };
         }
 
@@ -162,7 +174,7 @@ namespace GrowUpSite.Areas.Identity.Pages.Account
                 user.UserName = new MailAddress(Input.Email).User; // it take The first part from email 
                 user.Name = Input.Name;
                 user.PhoneNumber = Input.PhoneNumber;
-                user.County = Input.County;
+                user.CountyNameId = Input.CountyNameId;
                 user.PostalCode = Input.PostalCode;
                 //if (Input.Role == StaticDetail.Role_Employee)
                 //{

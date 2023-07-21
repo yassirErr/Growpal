@@ -27,6 +27,7 @@ namespace GrowUp.DataAccess.Data
         public DbSet<Contentube> Contentubes { get; set; }
         public DbSet<Reactube> Reactubes { get; set; }
         public DbSet<Watchtube> Watchtubes { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
 
 

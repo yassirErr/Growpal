@@ -5,6 +5,7 @@ using GrowUp.Utility;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -28,19 +29,16 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-
         public IActionResult Index()
         {
-
 
             // get the ID of the current user
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             // retrieve all Contentube objects for the current user
-            IEnumerable<Contentube> objContentList = _unitOfWork.Content.GetAll().Where(c => c.Country_nameId == userId);
+            IEnumerable<Contentube> objContentList = _unitOfWork.Content.GetAll().Where(c => c.ApplicationUserId == userId);
 
             return View(objContentList);
-
         }
 
         //GET
@@ -68,11 +66,11 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
                    }),
 
-                ApplicationUserListItem = _unitOfWork.ApplicationUser.GetAll().Select(
+                CountryListItem = _unitOfWork.Country.GetAll().Select(
                    u => new SelectListItem
                    {
-                       Text = u.County,
-                       Value = u.Id.ToString(),
+                       Text = u.CountryName,
+                       Value = u.id.ToString(),
 
                    }),
 
@@ -93,14 +91,16 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         }
 
 
-        //POST
+        // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ContentVM obj)
         {
-
             if (ModelState.IsValid)
             {
+                // Add User_id to the model state
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                ModelState.SetModelValue("Content.User_id", new ValueProviderResult(userIdClaim));
 
                 if (obj.Content.Id == 0)
                 {
@@ -116,6 +116,9 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             }
             return View(obj);
         }
+
+
+
 
         //GET
         public IActionResult Show(int? id)
@@ -147,13 +150,16 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
             if (videoIds != null && videoIds.Length > 0)
             {
+                string currentUserId = GetCurrentUserId();
+
                 foreach (var videoId in videoIds)
                 {
                     var reactube = new Reactube
                     {
                         Content = content,
                         ItemVideo = videoId,
-                        Status = false
+                        Status = false,
+                        ApplicationUserId = currentUserId
                     };
 
                     _unitOfWork.Reactube.Add(reactube);
@@ -163,6 +169,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
                 return Ok();
             }
+
             // Return an error if no videos were selected
             return BadRequest("No videos were selected.");
         }
@@ -178,15 +185,16 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         {
             string currentUserId = GetCurrentUserId();
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var User_id = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == userId);
 
             int userReactubeCount = _unitOfWork.Reactube.Count(
-                r => r.Content.Country_nameId == currentUserId);
+                r => r.ApplicationUserId == currentUserId);
 
             if (userId != null)
             {
                 // Get the Category_typeId and Service_typeId of the current user's Contentube record
-                int categoryTypeId = _unitOfWork.Content.GetFirstOrDefault(c => c.Country_nameId == currentUserId)?.Category_typeId ?? 0;
-                int serviceTypeId = _unitOfWork.Content.GetFirstOrDefault(c => c.Country_nameId == currentUserId)?.Service_typeId ?? 0;
+                int categoryTypeId = _unitOfWork.Reactube.GetAll(r => r.ApplicationUserId == currentUserId,includeProperties: "Content").Select(r => r.Content.Category_typeId).FirstOrDefault();
+                int serviceTypeId = _unitOfWork.Reactube.GetAll( r => r.ApplicationUserId == currentUserId,includeProperties: "Content").Select(r => r.Content.Service_typeId).FirstOrDefault();
 
                 // Get the Reactube records for the current content that have the same Category_typeId and Service_typeId,
                 // exclude the ones where ItemVideo is equal to currentUserId,
@@ -196,7 +204,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                     r => r.Content.Category_typeId == categoryTypeId &&
                     r.Content.Service_typeId == serviceTypeId &&
                     r.ItemVideo != currentUserId &&
-                    r.Content.Country_nameId != currentUserId &&
+                    r.ApplicationUserId != currentUserId &&
                     r.Status == false,
                     includeProperties: "Content"
                 ).OrderBy(r => r.Id).Take(userReactubeCount);
@@ -206,7 +214,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                     r => r.Content.Category_typeId == categoryTypeId &&
                     r.Content.Service_typeId == serviceTypeId &&
                     r.ItemVideo == currentUserId &&
-                    r.Content.Country_nameId != currentUserId
+                    r.ApplicationUserId != currentUserId
                 );
 
                 // Pass the reactubeList and itemCount to the view using a tuple
