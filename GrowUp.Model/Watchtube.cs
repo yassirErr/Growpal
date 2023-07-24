@@ -39,6 +39,7 @@ namespace GrowUp.Model
         [ForeignKey("ReactubeId")]
         [ValidateNever]
         public Reactube Reactube { get; set; }
+
     }
 
 }

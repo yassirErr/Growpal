@@ -41,6 +41,11 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             return View(objContentList);
         }
 
+
+
+
+
+
         //GET
         public IActionResult Upsert(int? id)
         {
@@ -91,6 +96,10 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         }
 
 
+
+
+
+
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -116,6 +125,8 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             }
             return View(obj);
         }
+
+
 
 
 
@@ -174,14 +185,53 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             return BadRequest("No videos were selected.");
         }
 
-
-
         private string GetCurrentUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
-        public IActionResult Playlistube()
+
+        // count data from CurrentUser
+
+        private int CountData()
+        {
+            string currentUserId = GetCurrentUserId();
+            int countWatchtube = _unitOfWork.Watchtube.Count(w => w.ApplicationUserId == currentUserId);
+            return countWatchtube;
+        }
+
+        // counting the current User's data that inserted by " others users "
+
+
+
+        private int CountInsertedByOthers()
+        {
+            string currentUserId = GetCurrentUserId();
+
+            // Get the Category_typeId and Service_typeId of the current user's Contentube record
+            int categoryTypeId = _unitOfWork.Content.GetAll(c => c.ApplicationUserId == currentUserId).Select(c => c.Category_typeId).FirstOrDefault();
+            int serviceTypeId = _unitOfWork.Content.GetAll(c => c.ApplicationUserId == currentUserId).Select(c => c.Service_typeId).FirstOrDefault();
+
+            // Get the Watchtube records where ItemVideo is not the current user but the ApplicationUser is the current user
+            // Get the VideoLink items inserted by other users for the current user's Contentube record
+            var videoLinksInsertedByOthers = _unitOfWork.Watchtube.GetAll(
+                w => w.Content.Category_typeId == categoryTypeId &&
+                w.Content.Service_typeId == serviceTypeId &&
+                w.Reactube.ItemVideo != currentUserId &&
+                w.Content.ApplicationUserId == currentUserId
+               
+            ).Select(w => w.VideoLink);
+
+            // Count the number of Watchtube records
+            int insertedByOthersCount = videoLinksInsertedByOthers.Count();
+
+            return insertedByOthersCount;
+        }
+
+
+
+
+        public IActionResult Playlistube(string range)
         {
             string currentUserId = GetCurrentUserId();
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -193,21 +243,79 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             if (userId != null)
             {
                 // Get the Category_typeId and Service_typeId of the current user's Contentube record
-                int categoryTypeId = _unitOfWork.Reactube.GetAll(r => r.ApplicationUserId == currentUserId,includeProperties: "Content").Select(r => r.Content.Category_typeId).FirstOrDefault();
-                int serviceTypeId = _unitOfWork.Reactube.GetAll( r => r.ApplicationUserId == currentUserId,includeProperties: "Content").Select(r => r.Content.Service_typeId).FirstOrDefault();
+                int categoryTypeId = _unitOfWork.Reactube.GetAll(r => r.ApplicationUserId == currentUserId, includeProperties: "Content").Select(r => r.Content.Category_typeId).FirstOrDefault();
+                int serviceTypeId = _unitOfWork.Reactube.GetAll(r => r.ApplicationUserId == currentUserId, includeProperties: "Content").Select(r => r.Content.Service_typeId).FirstOrDefault();
 
                 // Get the Reactube records for the current content that have the same Category_typeId and Service_typeId,
                 // exclude the ones where ItemVideo is equal to currentUserId,
                 // exclude the ones where the Content's ApplicationUser is equal to currentUserId,
                 // and include only the ones where Status is false
-                IEnumerable<Reactube> reactubeList = _unitOfWork.Reactube.GetAll(
-                    r => r.Content.Category_typeId == categoryTypeId &&
-                    r.Content.Service_typeId == serviceTypeId &&
-                    r.ItemVideo != currentUserId &&
-                    r.ApplicationUserId != currentUserId &&
-                    r.Status == false,
-                    includeProperties: "Content"
-                ).OrderBy(r => r.Id).Take(userReactubeCount);
+                IEnumerable<Reactube> reactubeList;
+                switch (range)
+                {
+                    case "1-2":
+                        reactubeList = _unitOfWork.Reactube.GetAll(
+                            r => r.Content.Category_typeId == categoryTypeId &&
+                            r.Content.Service_typeId == serviceTypeId &&
+                            r.ItemVideo != currentUserId &&
+                            r.ApplicationUserId != currentUserId &&
+                            r.Status == false,
+                            includeProperties: "Content"
+                        ).OrderBy(r => r.Id).Take(2);
+                        break;
+                    case "1-5":
+                        reactubeList = _unitOfWork.Reactube.GetAll(
+                            r => r.Content.Category_typeId == categoryTypeId &&
+                            r.Content.Service_typeId == serviceTypeId &&
+                            r.ItemVideo != currentUserId &&
+                            r.ApplicationUserId != currentUserId &&
+                            r.Status == false,
+                            includeProperties: "Content"
+                        ).OrderBy(r => r.Id).Take(5);
+                        break;
+                    case "1-8":
+                        reactubeList = _unitOfWork.Reactube.GetAll(
+                            r => r.Content.Category_typeId == categoryTypeId &&
+                            r.Content.Service_typeId == serviceTypeId &&
+                            r.ItemVideo != currentUserId &&
+                            r.ApplicationUserId != currentUserId &&
+                            r.Status == false,
+                            includeProperties: "Content"
+                        ).OrderBy(r => r.Id).Take(8);
+                        break;
+                    case "1-10":
+                        reactubeList = _unitOfWork.Reactube.GetAll(
+                            r => r.Content.Category_typeId == categoryTypeId &&
+                            r.Content.Service_typeId == serviceTypeId &&
+                            r.ItemVideo != currentUserId &&
+                            r.ApplicationUserId != currentUserId &&
+                            r.Status == false,
+                            includeProperties: "Content"
+                        ).OrderBy(r => r.Id).Take(10);
+                        break;
+
+
+                    case "1-15":
+                        reactubeList = _unitOfWork.Reactube.GetAll(
+                            r => r.Content.Category_typeId == categoryTypeId &&
+                            r.Content.Service_typeId == serviceTypeId &&
+                            r.ItemVideo != currentUserId &&
+                            r.ApplicationUserId != currentUserId &&
+                            r.Status == false,
+                            includeProperties: "Content"
+                        ).OrderBy(r => r.Id).Take(15);
+                        break;
+                    default:
+                        reactubeList = _unitOfWork.Reactube.GetAll(
+                            r => r.Content.Category_typeId == categoryTypeId &&
+                            r.Content.Service_typeId == serviceTypeId &&
+                            r.ItemVideo != currentUserId &&
+                            r.ApplicationUserId != currentUserId &&
+                            r.Status == false,
+                            includeProperties: "Content"
+                        ).OrderBy(r => r.Id).Take(2);
+                        break;
+                }
 
                 // Get the count of Reactube records for the current content where ItemVideo is equal to currentUserId
                 int itemCount = _unitOfWork.Reactube.Count(
@@ -217,12 +325,19 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                     r.ApplicationUserId != currentUserId
                 );
 
-                // Pass the reactubeList and itemCount to the view using a tuple
-                var model = (reactubeList, itemCount);
+                // Call the CountData method to get the count ofWatchtube records for the current user
+                int watchtubeCount = CountData();
+                int insertedByOthersCount = CountInsertedByOthers();
+
+                // Pass the reactubeList, itemCount, and watchtubeCount to the view using a tuple
+                var model = (reactubeList, itemCount, watchtubeCount, insertedByOthersCount);
                 return View(model);
             }
             return RedirectToAction("Index");
         }
+
+
+
 
 
 
@@ -251,6 +366,22 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         }
 
 
+
+        public IActionResult WatchtubeVideos()
+        {
+            // get the ID of the current user
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            IEnumerable<Watchtube> watchtubeList = _unitOfWork.Watchtube.GetAll().Where(c => c.ApplicationUserId == userId);
+
+            if (watchtubeList == null)
+            {
+                return NotFound();// Message reccord is empty
+            }
+
+            return View(watchtubeList);
+        }
+
+
         //POST
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -268,6 +399,34 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             TempData["success"] = "Content Deleted successfully";
             return RedirectToAction("Index");
 
+        }
+
+        // Delete Wachtube data by Id
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteItemVideo(int? id)
+        {
+            // Get the ID of the current user
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Find the Watchtube record with the specified ID and the current user's ID
+            var watchtube = _unitOfWork.Watchtube.GetFirstOrDefault(
+                c => c.Id == id && c.ApplicationUserId == userId, includeProperties: "Reactube");
+
+            if (watchtube == null)
+            {
+                return NotFound();
+            }
+
+            // Set the Status property of the corresponding Reactube record to false
+            watchtube.Reactube.Status = false;
+
+            // Remove the Watchtube record from the repository
+            _unitOfWork.Watchtube.Remove(watchtube);
+            _unitOfWork.Save();
+
+            return RedirectToAction(nameof(WatchtubeVideos));
         }
     }
 }

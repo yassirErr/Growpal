@@ -39,7 +39,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("GrowUp.Model.Contentube", b =>
@@ -85,7 +85,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("Service_typeId");
 
-                    b.ToTable("Contentubes");
+                    b.ToTable("Contentubes", (string)null);
                 });
 
             modelBuilder.Entity("GrowUp.Model.Country", b =>
@@ -106,7 +106,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
                 });
 
             modelBuilder.Entity("GrowUp.Model.Reactube", b =>
@@ -137,7 +137,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("ContentId");
 
-                    b.ToTable("Reactubes");
+                    b.ToTable("Reactubes", (string)null);
                 });
 
             modelBuilder.Entity("GrowUp.Model.Service", b =>
@@ -157,7 +157,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("GrowUp.Model.Watchtube", b =>
@@ -193,7 +193,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("ReactubeId");
 
-                    b.ToTable("Watchtubes");
+                    b.ToTable("Watchtubes", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

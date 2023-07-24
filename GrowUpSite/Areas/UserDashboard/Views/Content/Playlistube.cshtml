@@ -1,10 +1,9 @@
-﻿@model (IEnumerable<GrowUp.Model.Reactube> ReactubeList, int ItemCount)
+﻿@model (IEnumerable<GrowUp.Model.Reactube> ReactubeList, int, int, int)
 
 
 @{
     ViewData["Title"] = "Playlistube";
 }
-
 
 <div class="page-content">
 
@@ -33,52 +32,106 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <div class="table-responsive">
+                          
 
+                            <div class="card-body bg-light chart-report-card">
+                                <div class="row d-flex justify-content-between">
+
+                                        <div class="col-lg-4">
+                                            <div class="media">
+                                                <i class="dripicons-preview report-main-icon bg-card text-dark mr-2"></i>                                      
+                                                <div class="media-body align-self-center text-truncate">
+                                        <h4 class="mt-0 mb-0 font-weight-semibold text-dark font-24">
+                                            @Model.Item3
+                                         
+                                                    </h4>
+                                                <p class="text-dark font-weight-semibold mb-0 font-14">Watching</p>
+                                            </div><!--end media-body-->
+                                            </div><!--end media-->
+                                        </div><!--end col-->
+
+
+                                    <div class="col-lg-4">
+                                        <div class="media">
+                                            <i class="dripicons-rocket report-main-icon bg-card text-dark mr-2"></i>
+                                            <div class="media-body align-self-center text-truncate">
+                                                <h4 class="mt-0 mb-0 font-weight-semibold text-dark font-24">
+                                                    @Model.Item4
+                                                  
+                                                </h4>
+                                                <p class="text-dark font-weight-semibold mb-0 font-14">Views</p>
+                                            </div><!--end media-body-->
+                                        </div><!--end media-->
+                                    </div><!--end col-->
+
+                                </div><!--end media-->
+                            </div><!--end col-->
+                        </div><!--end row-->
+                        
+
+                            <div class="form-group row">
+                            <label class="col-sm-2 col-form-label text-right" for="range-select">Selected range:</label>
+                                <div class="col-sm-2">
+                                <select class="custom-select" name="range" id="range-select">
+                                    <option selected disabled hidden>Open this select menu</option>
+                                    <option value="1-2">1-2</option>
+                                    <option value="1-5">1-5</option>
+                                    <option value="1-8">1-8</option>
+                                    <option value="1-10">1-10</option>
+                                    <option value="1-15">1-15</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
                                 <table id="video-table" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>Content Name</th>
                                             <th>Links</th>
-                                        
                                         </tr>
-
                                     </thead>
-                                  @foreach (var obj in Model.ReactubeList)
-        
-                                    {
-                                        <tbody>
-                                            <tr>
-                                                <td>@obj.Content.Content_name</td>
 
-                         
-                                                <td>
-                                                    <a class="btn btn-primary" type="button" href="https://www.youtube.com/watch?v=@obj.ItemVideo" target="_blank" id="view-video-btn" onclick="handleClick(@obj.Id, '@obj.ItemVideo')">View Video</a>
-                                                </td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    }
+
+                                    @foreach (var obj in Model.ReactubeList)
+                                    {
+                                            <tbody>
+                                                <tr>
+                                                @if (obj.Content != null)
+                                                {
+                                                    <td>@obj.Content.Content_name</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>(No content)</td>
+                                                }
+                                                    <td>
+                                                        <a class="btn btn-primary" type="button" href="https://www.youtube.com/watch?v=@obj.ItemVideo" target="_blank" id="view-video-btn" onclick="handleClick(@obj.Id, '@obj.ItemVideo')">View Video</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        }
+                                    
                                 </table><!--end /table-->
                             </div><!--end /tableresponsive-->
-                        </div><!--end card-body-->
-                    </div><!--end card-->
-                </div> <!-- end col -->
-
-
-
-             
-
-                
-
-            </div><!--end page-title-box-->
-        </div><!--end col-->
-    </div>
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div> <!-- end col -->
+        </div><!--end page-title-box-->
+    </div><!--end col-->
 </div>
 
-
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $('#range-select').on('change', function () {
+            var rangeValue = $(this).val();
+            var url = '@Url.Action("Playlistube", "Content")?range=' + rangeValue;
+            window.location.href = url;
+        });
+    });
+
+
     function handleClick(reactubeId, videoLink) {
         $.ajax({
             url: '@Url.Action("AddToWatchtube", "Content")',

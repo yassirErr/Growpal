@@ -11,8 +11,6 @@ using System.Threading.Tasks;
 
 namespace GrowUp.DataAccess.Repository
 {
-
-
     public class WatchtubeRepository : Repository<Watchtube>,IWatchtubeRepository
     {
         private AppDbContext _db;
@@ -21,8 +19,7 @@ namespace GrowUp.DataAccess.Repository
         {
             _db = db;
         }
-
-
+ 
         public int Count(Expression<Func<Watchtube, bool>> filter = null)
         {
             IQueryable<Watchtube> query = _db.Set<Watchtube>();
