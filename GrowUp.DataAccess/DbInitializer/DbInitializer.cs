@@ -308,12 +308,12 @@ namespace GrowUp.DataAccess.DbInitializer
 
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "yassiradmin@gmail.com",
+                    UserName = "Admin",
                     Email = "yassiradmin@gmail.com",
                     Name = "Yassir",
                     PhoneNumber = "0656893147",
                     PostalCode = "40000",
-                    CountyNameId = 144,
+                    CountyNameId = 144
 
                 }, "Admin@123456").GetAwaiter().GetResult();
 

@@ -5,7 +5,7 @@
 
     
     <meta charset="utf-8" />
-    <title>Dashboard | Morvin - Admin & Dashboard Template</title>
+    <title>Growpal Dashboard | Admin </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
@@ -14,6 +14,9 @@
 
     <!-- plugin css -->
     <link href="~/admin/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="~/site/dashboard/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/site/dashboard/assets/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/site/dashboard/assets/css/fontawesome.min.css rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
     <link href="~/admin/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -61,208 +64,33 @@
                     </button>
 
 
-                    <div class="topbar-social-icon me-3 d-none d-md-block">
-                        <ul class="list-inline title-tooltip m-0">
-                            <li class="list-inline-item">
-                                <a href="email-inbox.html" data-bs-toggle="tooltip" data-placement="top" title="Email">
-                                 <i class="mdi mdi-email-outline"></i>
-                                </a>
-                            </li>
-                        
-                            <li class="list-inline-item">
-                                <a href="chat.html" data-bs-toggle="tooltip" data-placement="top" title="Chat">
-                                 <i class="mdi mdi-tooltip-outline"></i>
-                                </a>
-                            </li>
-
-                            <li class="list-inline-item">
-                                <a href="calendar.html" data-bs-toggle="tooltip" data-placement="top" title="Calendar">
-                                 <i class="mdi mdi-calendar"></i>
-                                </a>
-                            </li>
-
-                            <li class="list-inline-item">
-                                <a href="pages-invoice.html" data-bs-toggle="tooltip" data-placement="top" title="Printer">
-                                 <i class="mdi mdi-printer"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                 
             
                 </div>
 
-                 <!-- Search input -->
-                 <div class="search-wrap" id="search-wrap">
-                    <div class="search-bar">
-                        <input class="search-input form-control" placeholder="Search" />
-                        <a href="#" class="close-search toggle-search" data-target="#search-wrap">
-                            <i class="mdi mdi-close-circle"></i>
-                        </a>
-                    </div>
-                </div>
+       
 
                 <div class="d-flex">
-                    <div class="dropdown d-none d-lg-inline-block">
-                        <button type="button" class="btn header-item toggle-search noti-icon waves-effect" data-target="#search-wrap">
-                            <i class="mdi mdi-magnify"></i>
-                        </button>
-                    </div>
-
-                    <div class="dropdown d-none d-md-block ms-2">
-                        <button type="button" class="btn header-item waves-effect" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="me-2" src="assets/images/flags/us.jpg" alt="Header Language" height="16"> English <span class="mdi mdi-chevron-down"></span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> German </span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> Italian </span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="assets/images/flags/french.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> French </span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> Spanish </span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle"> Russian </span>
-                            </a>
-                        </div>
-                    </div>
-
-    
-           
-
-           
-
-                    <div class="dropdown d-none d-lg-inline-block ms-1">
-                        <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
-                            <i class="mdi mdi-fullscreen"></i>
-                        </button>
-                    </div>
-
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="mdi mdi-bell-outline bx-tada"></i>
-                            <span class="badge bg-danger rounded-pill">3</span>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                            aria-labelledby="page-header-notifications-dropdown">
-                            <div class="p-3">
-                                <div class="row align-items-center">
-                                    <div class="col">
-                                        <h6 class="m-0"> Notifications </h6>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#!" class="small"> View All</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div data-simplebar style="max-height: 230px;">
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <div class="avatar-xs me-3">
-                                            <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                <i class="mdi mdi-cart text-white"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Your order is placed</h6>
-                                            <div class="font-size-13 text-muted">
-                                                <p class="mb-1">If several languages coalesce the grammar</p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src="assets/images/users/avatar-3.jpg"
-                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">James Lemire</h6>
-                                            <div class="font-size-13 text-muted">
-                                                <p class="mb-1">It will seem like simplified English.</p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <div class="avatar-xs me-3">
-                                            <span class="avatar-title bg-success rounded-circle font-size-16">
-                                                <i class="mdi mdi-check text-white"></i>
-                                            </span>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Your item is shipped</h6>
-                                            <div class="font-size-13 text-muted">
-                                                <p class="mb-1">If several languages coalesce the grammar</p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 3 min ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a href="" class="text-reset notification-item">
-                                    <div class="media">
-                                        <img src="assets/images/users/avatar-4.jpg"
-                                            class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                        <div class="media-body">
-                                            <h6 class="mt-0 mb-1">Salena Layfield</h6>
-                                            <div class="font-size-13 text-muted">
-                                                <p class="mb-1">As a skeptical Cambridge friend of mine occidental.</p>
-                                                <p class="mb-0"><i class="mdi mdi-clock-outline"></i> 1 hours ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="p-2 border-top">
-                                <a class="btn btn-sm btn-link font-size-14 w-100 text-center" href="javascript:void(0)">
-                                    <i class="mdi mdi-arrow-right-circle me-1"></i> View More..
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-7.jpg"
-                                alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1">James</span>
+                          
+                            <span class="d-none d-xl-inline-block ms-1">Welcome, @User.Identity.Name!</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle-outline font-size-16 align-middle me-1"></i> Profile</a>
-                            <a class="dropdown-item" href="#"><i class="mdi mdi-wallet-outline font-size-16 align-middle me-1"></i> My Wallet</a>
-                            <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-end">11</span><i class="mdi mdi-cog-outline font-size-16 align-middle me-1"></i> Settings</a>
-                            <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline font-size-16 align-middle me-1"></i> Lock screen</a>
+                            <a class="dropdown-item" disable><i class="mdi mdi-account-circle-outline font-size-16 align-middle me-1"></i> Profile</a>
+                            <a class="dropdown-item" disable><i class="mdi mdi-wallet-outline font-size-16 align-middle me-1"></i> My Wallet</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i> Logout</a>
+                              <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                          
+                                <button id="logout" class="dropdown-item text-danger"><i class="mdi mdi-power font-size-16 align-middle me-1 text-danger"></i>Logout</button>
+                            </form>
                         </div>
                     </div>
 
-                    <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                            <i class="mdi mdi-cog-outline font-size-20"></i>
-                        </button>
-                    </div>
+               
             
                 </div>
             </div>
@@ -281,13 +109,11 @@
                             <span class="avatar-online bg-success"></span>
                         </div>
                         <div class="user-info">
-                            <h5 class="mt-3 font-size-16 text-white">James Raphael</h5>
+                            <h5 class="mt-3 font-size-16 text-white">@User.Identity.Name!</h5>
                             <span class="font-size-13 text-white-50">Administrator</span>
                         </div>
                     </div>
                 </div>
-
-
 
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
@@ -297,7 +123,7 @@
 
 
                         <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <a  class="has-arrow waves-effect">
                                 <i class="dripicons-view-list"></i>
                                 <span>Categories</span>
                             </a>
@@ -307,9 +133,21 @@
                  
                             </ul>
                         </li>
+                        <li>
+                            <a class="has-arrow waves-effect">
+                              
+                                <i class="fa-solid fa-hand-holding-dollar"></i>
+                                <span>Pricing Plan</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Admin" asp-controller="PricingPlan" asp-action="Index">All Recordes </a></li>
+                                <li><a asp-area="Admin" asp-controller="PricingPlan" asp-action="Create">Create Pricing Plan</a></li>
+
+                            </ul>
+                        </li>
 
                         <li>
-                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <a  class="has-arrow waves-effect">
                                 <i class="dripicons-scale"></i>
                                 <span>Services</span>
                             </a>
@@ -320,10 +158,30 @@
                             </ul>
                         </li>
 
-           
+                        <li>
+                            <a class="has-arrow waves-effect">
+                                <i class="fa-brands fa-youtube"></i>
+                                <span>Youtube Record</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Admin" asp-controller="Contentube" asp-action="Index">Contentube List</a></li>
+                                <li><a asp-area="Admin" asp-controller="Reactube" asp-action="Index">Reactube List</a></li>
+                                <li><a asp-area="Admin" asp-controller="Watchtube" asp-action="Index">Watchtube List</a></li>
+                            </ul>
+                        </li>
 
-                  
 
+                        <li>
+                            <a class="has-arrow waves-effect">
+                                
+                                <i class="fa-solid fa-users"></i>
+                                <span>Users</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li> <a sp-area="Admin" asp-controller="ApplicationUser" asp-action="Index">All Users</a></li>
+                                <li><a asp-area="Identity" asp-page="/Account/Register">Add New User</a></li>
+                            </ul>
+                        </li>
 
                     </ul>
                 </div>

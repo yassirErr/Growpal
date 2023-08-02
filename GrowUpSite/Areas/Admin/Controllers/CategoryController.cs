@@ -124,7 +124,6 @@ namespace GrowUpSite.Areas.Admin.Controllers
             TempData["success"] = "Category Deleted successfully";
             return RedirectToAction("Index");
 
-
         }
 
     }

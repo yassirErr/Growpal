@@ -151,6 +151,7 @@ namespace GrowUpSite.Areas.Identity.Pages.Account
                     Text = i,
                     Value = i
                 }),
+
                 CountryList = _unitOfWork.Country.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.CountryName,
@@ -168,8 +169,6 @@ namespace GrowUpSite.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
-               
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 user.UserName = new MailAddress(Input.Email).User; // it take The first part from email 
                 user.Name = Input.Name;
@@ -217,8 +216,6 @@ namespace GrowUpSite.Areas.Identity.Pages.Account
                         if (User.IsInRole(StaticDetail.Role_Admin))
                         {
                             TempData["Succes"] = "New User Successfully Created ";
-
-
                         }
                         else
                         {

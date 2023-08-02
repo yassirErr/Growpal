@@ -1,0 +1,88 @@
+﻿@model GrowUp.Model.PayMonthlyPlan
+
+<div class="main-content">
+
+    <div class="page-content">
+
+        <!-- start page title -->
+        <div class="page-title-box">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="page-title">
+                            <h4>Form</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a>Grow Up</a></li>
+
+
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <form asp-action="Delete" method="post">
+
+            <div class="container-fluid">
+
+                <div class="page-content-wrapper">
+
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Update Price Month information</h4>
+
+
+
+                                    <div class="row mb-3">
+                                        <label asp-for="PriceMonthly" class="col-sm-2 col-form-label">Price Monthly</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text" placeholder="Price Monthly" asp-for="PriceMonthly" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label asp-for="Information" class="col-sm-2 col-form-label">Information</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text" placeholder="Information" asp-for="Information" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label asp-for="ContactMethode" class="col-sm-2 col-form-label">Contact Methode</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text" placeholder="Contact Methode" asp-for="ContactMethode" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label asp-for="Notes" class="col-sm-2 col-form-label">Notes</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text" placeholder="Notes" asp-for="Notes" disabled>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                    <button class="btn btn-danger waves-effect waves-light" type="submit" style="width:150px"> Delete </button>
+                    <a asp-controller="PricingPlan" asp-action="Index" class="btn btn-secondary" style="width:150x">
+                        Back To the List
+                    </a>
+
+
+
+                </div>
+
+
+            </div> <!-- container-fluid -->
+        </form>
+    </div>
+</div>
+<!-- End Page-content -->

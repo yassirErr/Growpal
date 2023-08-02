@@ -39,7 +39,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Contentube", b =>
@@ -85,7 +85,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("Service_typeId");
 
-                    b.ToTable("Contentubes", (string)null);
+                    b.ToTable("Contentubes");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Country", b =>
@@ -106,7 +106,32 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("GrowUp.Model.PayMonthlyPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContactMethode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Information")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PriceMonthly")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PayMonthlyPlans");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Reactube", b =>
@@ -137,7 +162,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("ContentId");
 
-                    b.ToTable("Reactubes", (string)null);
+                    b.ToTable("Reactubes");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Service", b =>
@@ -157,7 +182,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Watchtube", b =>
@@ -193,7 +218,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("ReactubeId");
 
-                    b.ToTable("Watchtubes", (string)null);
+                    b.ToTable("Watchtubes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

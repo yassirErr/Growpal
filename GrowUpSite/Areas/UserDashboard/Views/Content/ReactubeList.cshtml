@@ -1,0 +1,99 @@
+﻿@model IEnumerable<GrowUp.Model.Reactube>
+
+<!-- Page Content-->
+<div class="page-content">
+
+    <div class="container-fluid">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="float-right">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-area="UserDashboard" asp-controller="User" asp-action="index">GrowPal</a></li>
+
+                            <li class="breadcrumb-item active">Add Video</li>
+                        </ol>
+                    </div>
+                    <h4 class="page-title">Datatable</h4>
+                </div><!--end page-title-box-->
+            </div><!--end col-->
+        </div>
+        <!-- end page title end breadcrumb -->
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+
+            
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-0 table-centered">
+
+                                <thead>
+                                    <tr>
+
+                                        <th>Item Video</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var obj in Model)
+                                    {
+                                        <tr>
+
+
+
+                                            <td style="width:15px">@obj.ItemVideo</td>
+
+
+                                            <td>
+
+                                                <div class="button-items">
+
+                                                    <button id="toggleButton-@obj.Id" class="btn btn-@(obj.Status ? "primary" : "danger") btn-lg toggleButton" data-id="@obj.Id" onclick="toggleButtonClicked(@obj.Id)">@(obj.Status ? "Start" : "Stop")</button>
+                          
+
+
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    }
+
+
+
+                                </tbody>
+                            </table><!--end /table-->
+                        </div><!--end /tableresponsive-->
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+    </div>
+</div>
+
+
+<script>
+    function toggleButtonClicked(id) {
+        var button = $('#toggleButton-' + id);
+
+        $.ajax({
+            url: '@Url.Action("UpdateStatus", "Content")',
+            type: 'POST',
+            data: { id: id },
+            success: function (result) {
+                button.text(result.status ? 'Start' : 'Stop');
+                button.removeClass('btn-primary btn-danger').addClass(result.status ? 'btn-primary' : 'btn-danger');
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    }
+</script>

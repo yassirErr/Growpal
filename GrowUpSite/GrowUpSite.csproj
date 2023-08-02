@@ -77,12 +77,17 @@
     <None Include="wwwroot\admin\assets\libs\jquery.easing\bower_components\jquery-easing-original\jquery.easing.compatibility.js" />
     <None Include="wwwroot\admin\assets\libs\jquery.easing\bower_components\jquery-easing-original\jquery.easing.min.js" />
     <None Include="wwwroot\admin\assets\libs\jquery.easing\bower_components\jquery\jquery.min.js" />
+    <None Include="wwwroot\site\dashboard\assets\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\site\dashboard\assets\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\site\dashboard\assets\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\site\dashboard\assets\webfonts\fa-v4compatibility.woff2" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.15" />
@@ -97,16 +102,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.15" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GrowUp.DataAccess\GrowUp.DataAccess.csproj" />
     <ProjectReference Include="..\GrowUp.Utility\GrowUp.Utility.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Shared\" />
   </ItemGroup>
 
 </Project>

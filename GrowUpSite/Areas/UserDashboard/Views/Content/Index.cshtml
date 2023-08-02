@@ -10,9 +10,8 @@
                 <div class="page-title-box">
                     <div class="float-right">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Crovex</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">UI Kit</a></li>
-                            <li class="breadcrumb-item active">Datatable</li>
+                            <li class="breadcrumb-item"><a asp-area="UserDashboard" asp-controller="User" asp-action="index">GrowPal</a></li>
+                            <li class="breadcrumb-item active">Content Datatable</li>
                         </ol>
                     </div>
                     <h4 class="page-title">Datatable</h4>
@@ -27,7 +26,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="mt-0 header-title">Bordered table</h4>
+               
                 
 
                         <div class="table-responsive">
@@ -61,7 +60,7 @@
                                                     <form id="delete-form" asp-controller="Content" asp-action="Delete" asp-route-id="@obj.Id" method="post">
                                                         @Html.AntiForgeryToken()
 
-                                                        <button type="submit" class="btn btn-outline-danger waves-effect waves-light" onclick="return confirm('Are you sure you want to delete this content?')" style="width:150px">Delete</button>
+                                                        <button type="button" onclick="ConfirmDelete()" class="btn btn-outline-danger waves-effect waves-light" style="width:150px">Delete</button>
                                                     </form>
 
 
@@ -90,3 +89,25 @@
 
 
 }
+
+
+    <script>
+        function ConfirmDelete() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("delete-form").submit();
+                }
+            })
+        }
+
+
+    </script>
+  

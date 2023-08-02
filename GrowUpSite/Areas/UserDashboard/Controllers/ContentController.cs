@@ -1,4 +1,5 @@
-﻿using GrowUp.DataAccess.Repository.IRepository;
+﻿using GrowUp.DataAccess.Repository;
+using GrowUp.DataAccess.Repository.IRepository;
 using GrowUp.Model;
 using GrowUp.Model.ViewModels;
 using GrowUp.Utility;
@@ -40,10 +41,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
             return View(objContentList);
         }
-
-
-
-
 
 
         //GET
@@ -105,11 +102,33 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ContentVM obj)
         {
+
+
             if (ModelState.IsValid)
             {
                 // Add User_id to the model state
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 ModelState.SetModelValue("Content.User_id", new ValueProviderResult(userIdClaim));
+
+                // Check if foreign key values exist in their respective tables
+                var categoryExists = _unitOfWork.Category.GetFirstOrDefault(c => c.Id == obj.Content.Category_typeId) != null;
+                var serviceExists = _unitOfWork.Service.GetFirstOrDefault(c => c.Id == obj.Content.Service_typeId) != null;
+                var countryExists = _unitOfWork.Country.GetFirstOrDefault(c => c.id == obj.Content.Country_nameId) != null;
+                if (!categoryExists)
+                {
+                    ModelState.AddModelError(nameof(ContentVM.Content.Category_typeId), "Invalid category type");
+                    return View(obj);
+                }
+                if (!serviceExists)
+                {
+                    ModelState.AddModelError(nameof(ContentVM.Content.Service_typeId), "Invalid service type");
+                    return View(obj);
+                }
+                if (!countryExists)
+                {
+                    ModelState.AddModelError(nameof(ContentVM.Content.Country_nameId), "Invalid country name");
+                    return View(obj);
+                }
 
                 if (obj.Content.Id == 0)
                 {
@@ -119,10 +138,12 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                 {
                     _unitOfWork.Content.Update(obj.Content);
                 }
+
                 _unitOfWork.Save();
-                TempData["success"] = "Content is ceated successfully";
+                TempData["success"] = "Content is created successfully";
                 return RedirectToAction("Index");
             }
+
             return View(obj);
         }
 
@@ -149,42 +170,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             return View(contentFormDbFirst);
         }
 
-
-        [HttpPost]
-        public IActionResult SaveVideos(int contentId, string[] videoIds)
-        {
-            var content = _unitOfWork.Content.GetFirstOrDefault(u => u.Id == contentId);
-            if (content == null)
-            {
-                return NotFound();
-            }
-
-            if (videoIds != null && videoIds.Length > 0)
-            {
-                string currentUserId = GetCurrentUserId();
-
-                foreach (var videoId in videoIds)
-                {
-                    var reactube = new Reactube
-                    {
-                        Content = content,
-                        ItemVideo = videoId,
-                        Status = false,
-                        ApplicationUserId = currentUserId
-                    };
-
-                    _unitOfWork.Reactube.Add(reactube);
-                }
-
-                _unitOfWork.Save();
-
-                return Ok();
-            }
-
-            // Return an error if no videos were selected
-            return BadRequest("No videos were selected.");
-        }
-
         private string GetCurrentUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -201,9 +186,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         }
 
         // counting the current User's data that inserted by " others users "
-
-
-
         private int CountInsertedByOthers()
         {
             string currentUserId = GetCurrentUserId();
@@ -219,7 +201,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                 w.Content.Service_typeId == serviceTypeId &&
                 w.Reactube.ItemVideo != currentUserId &&
                 w.Content.ApplicationUserId == currentUserId
-               
+
             ).Select(w => w.VideoLink);
 
             // Count the number of Watchtube records
@@ -245,6 +227,19 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                 // Get the Category_typeId and Service_typeId of the current user's Contentube record
                 int categoryTypeId = _unitOfWork.Reactube.GetAll(r => r.ApplicationUserId == currentUserId, includeProperties: "Content").Select(r => r.Content.Category_typeId).FirstOrDefault();
                 int serviceTypeId = _unitOfWork.Reactube.GetAll(r => r.ApplicationUserId == currentUserId, includeProperties: "Content").Select(r => r.Content.Service_typeId).FirstOrDefault();
+
+
+                // Call the CountData method to get the count ofWatchtube records for the current user
+                int watchtubeCount = CountData();
+                int insertedByOthersCount = CountInsertedByOthers();
+
+                if (insertedByOthersCount > watchtubeCount)
+                {
+                    ViewBag.InsertedByOthersCount = insertedByOthersCount;
+                    ViewBag.WatchtubeCount = watchtubeCount;
+                }
+
+
 
                 // Get the Reactube records for the current content that have the same Category_typeId and Service_typeId,
                 // exclude the ones where ItemVideo is equal to currentUserId,
@@ -325,9 +320,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                     r.ApplicationUserId != currentUserId
                 );
 
-                // Call the CountData method to get the count ofWatchtube records for the current user
-                int watchtubeCount = CountData();
-                int insertedByOthersCount = CountInsertedByOthers();
 
                 // Pass the reactubeList, itemCount, and watchtubeCount to the view using a tuple
                 var model = (reactubeList, itemCount, watchtubeCount, insertedByOthersCount);
@@ -339,6 +331,76 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
 
 
+        [HttpPost]
+        public IActionResult SaveVideos(int contentId, string[] videoIds)
+        {
+            var content = _unitOfWork.Content.GetFirstOrDefault(u => u.Id == contentId);
+            if (content == null)
+            {
+                return NotFound();
+            }
+
+            if (videoIds != null && videoIds.Length > 0)
+            {
+                string currentUserId = GetCurrentUserId();
+
+                foreach (var videoId in videoIds)
+                {
+                    var reactube = new Reactube
+                    {
+                        Content = content,
+                        ItemVideo = videoId,
+                        Status = false,
+                        ApplicationUserId = currentUserId
+                    };
+
+                    _unitOfWork.Reactube.Add(reactube);
+                }
+
+                _unitOfWork.Save();
+
+                return Ok();
+            }
+
+            // Return an error if no videos were selected
+            return BadRequest("No videos were selected.");
+        }
+
+     
+        //Reactube
+
+        public IActionResult ReactubeList()
+        {
+            // get the ID of the current user
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            IEnumerable<Reactube> reactubeList = _unitOfWork.Reactube.GetAll().Where(c => c.ApplicationUserId == userId);
+
+            if (reactubeList == null)
+            {
+                return NotFound();// Message reccord is empty
+            }
+
+            return View(reactubeList);
+        }
+
+        public ActionResult UpdateStatus(int? id)
+        {
+            var reactube = _unitOfWork.Reactube.GetFirstOrDefault(r => r.Id == id);
+
+            if (reactube == null)
+            {
+                return NotFound();
+            }
+
+            reactube.Status = !reactube.Status; // toggle the status
+
+            _unitOfWork.Reactube.Update(reactube);
+            _unitOfWork.Save();
+
+
+            return Json(new { id = reactube.Id, status = reactube.Status });
+
+        }
 
 
         [HttpPost]
@@ -350,7 +412,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             {
                 return Json(new { success = false, message = "Reactube not found" });
             }
-            reactube.Status = true;
+            //reactube.Status = true;
             _unitOfWork.Reactube.Update(reactube);
             var watchtube = new Watchtube
             {
@@ -365,68 +427,45 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             return Json(new { success = true });
         }
 
+  
 
 
-        public IActionResult WatchtubeVideos()
-        {
-            // get the ID of the current user
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            IEnumerable<Watchtube> watchtubeList = _unitOfWork.Watchtube.GetAll().Where(c => c.ApplicationUserId == userId);
-
-            if (watchtubeList == null)
-            {
-                return NotFound();// Message reccord is empty
-            }
-
-            return View(watchtubeList);
-        }
 
 
-        //POST
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            //var obj = _db.Categories.Find(id);
-            var contentFormDbFirst = _unitOfWork.Content.GetFirstOrDefault(u => u.Id == id);
-            if (contentFormDbFirst == null)
+            var contentFromDb = _unitOfWork.Content.GetFirstOrDefault(u => u.Id == id);
+
+            if (contentFromDb == null)
             {
                 return NotFound();
             }
 
-            _unitOfWork.Content.Remove(contentFormDbFirst);
+            // Get all Watchtube records associated with the Content record
+            var watchtubes = _unitOfWork.Watchtube.GetAll(w => w.ContentId == id);
+
+            // Remove all Watchtube records associated with the Content record from the repository
+            _unitOfWork.Watchtube.RemoveRange(watchtubes);
+
+            // Remove the Content record from the repository
+            _unitOfWork.Content.Remove(contentFromDb);
+
+            // Save the changes
             _unitOfWork.Save();
+
             TempData["success"] = "Content Deleted successfully";
             return RedirectToAction("Index");
-
         }
 
-        // Delete Wachtube data by Id
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteItemVideo(int? id)
-        {
-            // Get the ID of the current user
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            // Find the Watchtube record with the specified ID and the current user's ID
-            var watchtube = _unitOfWork.Watchtube.GetFirstOrDefault(
-                c => c.Id == id && c.ApplicationUserId == userId, includeProperties: "Reactube");
 
-            if (watchtube == null)
-            {
-                return NotFound();
-            }
-
-            // Set the Status property of the corresponding Reactube record to false
-            watchtube.Reactube.Status = false;
-
-            // Remove the Watchtube record from the repository
-            _unitOfWork.Watchtube.Remove(watchtube);
-            _unitOfWork.Save();
-
-            return RedirectToAction(nameof(WatchtubeVideos));
-        }
+       
     }
+
+
 }
+

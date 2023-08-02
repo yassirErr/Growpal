@@ -24,9 +24,9 @@ namespace GrowUp.Model
         public string? Description { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Content URL is required")]
         [Display(Name = "Content link")]
-        [ValidateNever]
+    
         public string Content_Url { get; set; }
 
         [Required]
@@ -56,8 +56,6 @@ namespace GrowUp.Model
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
-
-
 
     }
 }

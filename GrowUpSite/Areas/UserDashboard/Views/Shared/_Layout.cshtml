@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Crovex - Admin & Dashboard Template</title>
+    <title>Growpal - User Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="shortcut icon" href="~/site/assets/img/GpIcon.png">
 
     <!-- jvectormap -->
     <link href="~/site/dashboard/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
@@ -20,6 +20,8 @@
     <link href="~/site/dashboard/assets/css/jquery-ui.min.css" rel="stylesheet">
     <link href="~/site/dashboard/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="~/site/dashboard/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/site/dashboard/assets/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/site/dashboard/assets/css/fontawesome.min.css rel="stylesheet" type="text/css" />
     <link href="~/site/dashboard/assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <link href="~/site/dashboard/api.css" rel="stylesheet" type="text/css" />
 
@@ -28,7 +30,7 @@
     <link href="~/site/dashboard/plugins/dropify/css/dropify.min.css" rel="stylesheet">
     <link href="~/site/dashboard/plugins/filter/magnific-popup.css" rel="stylesheet" type="text/css" />
     <link href="~/site/dashboard/plugins/lightpick/lightpick.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css"/>
 
 
 </head>
@@ -193,106 +195,42 @@
     <div class="left-sidenav">
         <ul class="metismenu left-sidenav-menu">
             <li>
-                <a href="javascript: void(0);"><i class="fab fa-youtube"></i><span> Youtube </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <a><i class="fa-brands fa-youtube"></i> YT <span class="badge-soft-success badge mr-2">Active</span> <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                <ul class="nav-second-level" aria-expanded="false">
 
                     <li class="nav-item"><a class="nav-link" asp-area="UserDashboard" asp-action="Upsert" asp-controller="Content"><i class="ti-control-record"></i>Add your content</a></li>
                  
                     <li class="nav-item"><a class="nav-link" asp-area="UserDashboard" asp-action="Index" asp-controller="Content"><i class="ti-control-record"></i>All Content</a></li>
-
-                    <li class="nav-item"><a class="nav-link" asp-area="UserDashboard" asp-action="WatchtubeVideos" asp-controller="Content"><i class="ti-control-record"></i>Delete Videos</a></li>
-
+                    <li class="nav-item"><a class="nav-link" asp-area="UserDashboard" asp-action="ReactubeList" asp-controller="Content"><i class="ti-control-record"></i>Turn Reacord</a></li>
                     <li class="nav-item"><a class="nav-link" asp-area="UserDashboard" asp-action="Playlistube" asp-controller="Content"><i class="ti-control-record"></i>Play List</a></li>
                    
                 </ul>
             </li>
 
-            <li>
-                <a href="javascript: void(0);">
-                    <i class="fab fa-facebook"></i><span> Facebook </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
-                </a>
-                <ul class="nav-second-level" aria-expanded="false">
-                    <li>
-                        <a href="javascript: void(0);"><i class="ti-control-record"></i>Email <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="../apps/email-inbox.html">Inbox</a></li>
-                            <li><a href="../apps/email-read.html">Read Email</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="../apps/chat.html"><i class="ti-control-record"></i>Chat</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../apps/contact-list.html"><i class="ti-control-record"></i>Contact List</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../apps/calendar.html"><i class="ti-control-record"></i>Calendar</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../apps/invoice.html"><i class="ti-control-record"></i>Invoice</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../apps/tasks.html"><i class="ti-control-record"></i>Tasks</a></li>
-                    <li>
-                        <a href="javascript: void(0);"><i class="ti-control-record"></i>Projects <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="../apps/project-overview.html">Overview</a></li>
-                            <li><a href="../apps/project-projects.html">Projects</a></li>
-                            <li><a href="../apps/project-board.html">Board</a></li>
-                            <li><a href="../apps/project-teams.html">Teams</a></li>
-                            <li><a href="../apps/project-files.html">Files</a></li>
-                            <li><a href="../apps/new-project.html">New Project</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);"><i class="ti-control-record"></i>Ecommerce <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="../apps/ecommerce-products.html">Products</a></li>
-                            <li><a href="../apps/ecommerce-product-list.html">Product List</a></li>
-                            <li><a href="../apps/ecommerce-product-detail.html">Product Detail</a></li>
-                            <li><a href="../apps/ecommerce-cart.html">Cart</a></li>
-                            <li><a href="../apps/ecommerce-checkout.html">Checkout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
 
             <li>
-                <a href="javascript: void(0);">
-                    <i class="fab fa-instagram"></i><span> Instagram </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                <a  onclick="blockLink()">
+                    <i class="fa-brands fa-facebook"></i>FB <span class="badge-soft-pink badge mr-2"> Inactive </span> <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                 </a>
-                <ul class="nav-second-level" aria-expanded="false">
-                    <li>
-                        <a href="javascript: void(0);"><i class="ti-control-record"></i>Elements <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
-                        <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="../others/ui-bootstrap.html">Bootstrap</a></li>
-                            <li><a href="../others/ui-animation.html">Animation</a></li>
-                            <li><a href="../others/ui-avatar.html">Avatar</a></li>
-                            <li><a href="../others/ui-clipboard.html">Clip Board</a></li>
-                            <li><a href="../others/ui-files.html">File Manager</a></li>
-                            <li><a href="../others/ui-check-radio.html"><span>Check & Radio</span></a></li>
-                        </ul>
-                    </li>
-                  
-                </ul>
             </li>
+           
 
             <li>
-                <a href="javascript: void(0);">
-                    <i class="fab fa-instagram"></i><span> TikTok </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                <a onclick="blockLink()">
+                    <i class="fa-brands fa-instagram"></i> IG <span class="badge-soft-pink badge mr-2"> Inactive </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
                 </a>
-                <ul class="nav-second-level" aria-expanded="false">
-                    <li class="nav-item"><a class="nav-link" href="../pages/pages-profile.html"><i class="ti-control-record"></i>Profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../pages/pages-timeline.html"><i class="ti-control-record"></i>Timeline</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../pages/pages-treeview.html"><i class="ti-control-record"></i>Treeview</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../pages/pages-starter.html"><i class="ti-control-record"></i>Starter Page</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../pages/pages-pricing.html"><i class="ti-control-record"></i>Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../pages/pages-gallery.html"><i class="ti-control-record"></i>Gallery</a></li>
-                </ul>
+            
             </li>
 
+
             <li>
-                <a href="javascript: void(0);"><i class="fas fa-chess-queen"></i><span> VIP </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
-                <ul class="nav-second-level" aria-expanded="false">
-                    <li class="nav-item"><a class="nav-link" href="../authentication/auth-login.html"><i class="ti-control-record"></i>Log in</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../authentication/auth-register.html"><i class="ti-control-record"></i>Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../authentication/auth-recover-pw.html"><i class="ti-control-record"></i>Recover Password</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../authentication/auth-lock-screen.html"><i class="ti-control-record"></i>Lock Screen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../authentication/auth-404.html"><i class="ti-control-record"></i>Error 404</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../authentication/auth-500.html"><i class="ti-control-record"></i>Error 500</a></li>
-                </ul>
+                <a onclick="blockLink()">
+                    <i class="fa-brands fa-tiktok"></i> TT <span class="badge-soft-pink badge mr-2"> Inactive </span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                </a>
+                
             </li>
+
+
         </ul>
     </div>
     <!-- end left-sidenav-->
@@ -305,7 +243,7 @@
     <!-- end page-wrapper -->
     <!-- jQuery  -->
 
-
+   
     <script src="~/site/dashboard/assets/js/jquery.min.js"></script>
     <script src="~/site/dashboard/assets/js/bootstrap.bundle.min.js"></script>
     <script src="~/site/dashboard/assets/js/metismenu.min.js"></script>
@@ -328,9 +266,10 @@
     <script src="~/site/dashboard/plugins/lightpick/lightpick.js"></script>
     <script src="~/site/dashboard/assets/pages/jquery.profile.init.js"></script>
     <script src="~/site/dashboard/plugins/chartjs/chart.min.js"></script>
+    <script src="~/site/dashboard/js/SweetAlerts.js"></script>
     
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   
 
 

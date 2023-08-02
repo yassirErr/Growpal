@@ -1,0 +1,70 @@
+﻿@model GrowUp.Model.Reactube
+
+<div class="main-content">
+
+    <div class="page-content">
+
+        <!-- start page title -->
+        <div class="page-title-box">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="page-title">
+                            <h4>Form</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a>Grow Up</a></li>
+                                <li class="breadcrumb-item"><a>Forms</a></li>
+
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="float-end d-none d-sm-block">
+                            <a href="" class="btn btn-success">Reactube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+        <form asp-action="Delete" method="post">
+
+            <div class="container-fluid">
+
+                <div class="page-content-wrapper">
+
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="header-title">Delete Reactube</h4>
+
+                                    <div class="row mb-3">
+                                        <label asp-for="ItemVideo" class="col-sm-2 col-form-label">Item</label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" type="text" placeholder="Item" disabled asp-for="ItemVideo">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                    <button class="btn btn-success waves-effect waves-light" type="submit" style="width:150px"> Delete </button>
+                    <a asp-controller="Reactube" asp-action="Index" class="btn btn-secondary" style="width:150x">
+                        Back To the List
+                    </a>
+
+                </div>
+
+
+            </div> <!-- container-fluid -->
+        </form>
+    </div>
+    <!-- End Page-content -->
+</div>

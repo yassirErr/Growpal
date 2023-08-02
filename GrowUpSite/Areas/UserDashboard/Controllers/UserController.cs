@@ -30,17 +30,20 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
         }
         public IActionResult Index()
         {
+        
+                string currentUserId = GetCurrentUserId();
 
-            string currentUserId = GetCurrentUserId();
+                // Retrieve all data from the database and eagerly load the related entities
+                IEnumerable<Contentube> contentubes = _db.Content.GetAll(includeProperties: "Category,Service");
 
-            // Retrieve all data from the database and eagerly load the related entities
-            IEnumerable<Contentube> contentubes = _db.Content.GetAll(includeProperties: "Category,Service");
+                // Filter out the data for the currently logged in user
+                contentubes = contentubes.Where(c => c.ApplicationUserId != currentUserId);
 
-            // Filter out the data for the currently logged in user
-            contentubes = contentubes.Where(c => c.ApplicationUserId != currentUserId);
-
-            // Pass the data to the view for display
-            return View(contentubes);
+                // Pass the data to the view for display
+                return View(contentubes);
+         
+       
+    
 
         }
 

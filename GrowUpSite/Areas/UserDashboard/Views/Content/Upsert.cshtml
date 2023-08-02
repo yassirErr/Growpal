@@ -5,7 +5,6 @@
 
 <!-- Page Content-->
 <div class="page-content">
-
     <div class="container-fluid">
         <!-- Page-Title -->
         <div class="row">
@@ -14,7 +13,7 @@
                     <div class="float-right">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a asp-area="UserDashboard" asp-controller="User" asp-action="index">GrowPal</a></li>
-                            <li class="breadcrumb-item active"> @(Model.Content.Id != 0 ? "Update" : "Create") New Content</li>
+                            <li class="breadcrumb-item active">@(Model.Content != null && Model.Content.Id != 0 ? "Update" : "Create") New Content</li>
                         </ol>
                     </div>
                     <h4 class="page-title">Content Form</h4>
@@ -27,13 +26,14 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mt-0 header-title">Add Content</h4>
+                
                         <form method="post">
                             <input asp-for="Content.Id" hidden />
                             <input type="hidden" asp-for="Content.ApplicationUserId" value="@User.Identity.GetUserId()" />
 
                             <div class="row">
                                 <div class="col-lg-6">
+
 
                                     <div class="form-group row">
                                         <label asp-for="Content.Content_name" class="col-sm-2 col-form-label text-right">Name</label>
@@ -105,7 +105,7 @@
                                 <a asp-area="UserDashboard" asp-controller="User" asp-action="Index" class="btn btn-secondary mr-1" style="width:150x">
                                     Back To the List
                                 </a>
-                                @if (Model.Content.Id != 0)
+                                @if (Model.Content != null && Model.Content.Id != 0)
                                 {
                                     <button type="submit" class="btn btn-outline-warning dropdown-toggle" style="width:150px" value="search">Update</button>
                                 }
@@ -115,7 +115,7 @@
                                 }
 
 
-
+                               </div>
 
                         </form>
                     </div><!--end card-body-->

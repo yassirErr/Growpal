@@ -1,0 +1,127 @@
+﻿@model IEnumerable<GrowUp.Model.Reactube>
+<div class="main-content">
+
+    <div class="page-content">
+
+        <!-- start page title -->
+        <div class="page-title-box">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="page-title">
+                            <h4>Customers</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a>Growpal</a></li>
+                                <li class="breadcrumb-item"><a>Youtube</a></li>
+                                <li class="breadcrumb-item active">Reactube</li>
+                            </ol>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+
+                <div class="container-fluid">
+
+                    <div class="page-content-wrapper">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                   
+
+                                        <div class="table-responsive mt-3">
+                                            <table class="table table-centered datatable dt-responsive nowrap " style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th style="width: 20px;">
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input" id="customercheck">
+                                                                <label class="form-check-label" for="customercheck">&nbsp;</label>
+                                                            </div>
+                                                        </th>
+                                                        <th>Content Name</th>
+                                                        <th>Video Link</th>
+                                                        <th>Reactube Status</th>
+                                                        <th>Users</th>
+                                                     
+                                                        <th style="width: 120px;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach(var obj in Model){
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input" id="customercheck1">
+                                                                <label class="form-check-label" for="customercheck1">&nbsp;</label>
+                                                            </div>
+                                                        </td>
+
+                                                        <td>@obj.Content.Content_name</td>
+                                                        <td>@obj.ItemVideo</td>
+                                                        <td>
+                                                            @if (obj.Status==false)
+                                                        {
+                                                            <div class="badge badge-soft-success font-size-12">Improved</div>
+                                                        }else{
+                                                            <div class="badge badge-soft-danger font-size-12">Umproved</div>
+                                                        }
+                                                        </td>
+
+                                                    <td>@obj.ApplicationUser.Name</td>
+                                                       
+                                                        <td>
+
+
+                                                        <div class="button-items">
+                                                            <a asp-area="Admin" asp-controller="Reactube" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-outline-danger waves-effect waves-light"> Delete </a>
+                                                        </div>
+
+                                                        </td>
+                                                    </tr>
+
+                                               
+
+                                            }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+
+                    </div>
+
+
+        </div> <!-- container-fluid -->
+    </div>
+
+</div>
+
+<script>
+
+    function ConfirmDelete() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("delete-form").submit();
+            }
+        })
+    }
+
+
+</script>

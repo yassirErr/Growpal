@@ -9,12 +9,13 @@
                 <div class="page-title-box">
                     <div class="float-right">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">Crovex</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:void(0);">UI Kit</a></li>
-                            <li class="breadcrumb-item active">Datatable</li>
+                            <li class="breadcrumb-item"><a asp-area="UserDashboard" asp-controller="User" asp-action="index">GrowPal</a></li>
+
+                     
+                            <li class="breadcrumb-item active">Datatable Show Videos</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Datatable</h4>
+             
                 </div><!--end page-title-box-->
             </div><!--end col-->
         </div>
@@ -25,20 +26,28 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="header-title">Create New Servie</h4>
+
                         <form method="post">
 
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label"> Content Url : </label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" id="channel-url" type="text" disabled asp-for="Content_Url">
-                                    <br />
-                                    <br />
-                                    <a class="btn btn-primary" id="search-button" style="color:aliceblue">Search</a>
-                                    <button class="btn btn-success float-right publish-button">Publish</button>
-                                </div>
-                            </div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label text-right"> Link: </label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" id="channel-url" type="text" disabled asp-for="Content_Url">
 
+                                         
+                                        </div>
+                               
+                                    </div>
+                                
+                                </div>
+                           
+                            </div>
+                            <a class="btn btn-primary" id="search-button" style="color:aliceblue">Search</a>
+                            <button class="btn btn-success float-right publish-button">Publish</button>
+                            <br />
+                            <br />
                             <table id="video-table" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>

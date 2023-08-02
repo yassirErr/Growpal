@@ -50,6 +50,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+//app.UseStatusCodePages();
+app.UseStatusCodePagesWithRedirects("/StatusCodeError/{0}");
+
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

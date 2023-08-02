@@ -20,7 +20,6 @@ namespace GrowUp.DataAccess.Data
 
         }
 
-
         public DbSet<Service> Services { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
@@ -28,8 +27,9 @@ namespace GrowUp.DataAccess.Data
         public DbSet<Reactube> Reactubes { get; set; }
         public DbSet<Watchtube> Watchtubes { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<PayMonthlyPlan> PayMonthlyPlans { get; set; }
 
-        
+
 
 
 

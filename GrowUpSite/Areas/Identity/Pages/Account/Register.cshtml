@@ -1,8 +1,10 @@
 ﻿@page
+@using GrowUp.Utility
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
 }
+
 <!-- Sign Up -->
 <div class="user-form-area pt-5">
     <div class="container-fluid">
@@ -12,6 +14,7 @@
                     <div class="d-table">
                         <div class="d-table-cell">
                             <div class="user-content-inner">
+
                                 <div class="top">
                                 
                                     <h2>@ViewData["Title"]</h2>
@@ -35,22 +38,22 @@
                                                 <span asp-validation-for="Input.Name" class="text-danger"></span>
                                             </div>
                                         </div>
+
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="PhoneNumber"/>
                                                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                           
 
+                                        <div class="col-lg-6">                                     
                                             <div class="form-group">
-                                                <select asp-for="Input.CountyNameId" asp-items="@Model.Input.CountryList" class="form-select">
-                                                    <option disabled selected> - Select Country - </option>
+                                                <select asp-for="Input.CountyNameId" asp-items="@Model.Input.CountryList" class="form-control">
+                                                    <option disabled selected>Select Country</option>
                                                 </select>
                                             </div>
-
                                         </div>
+
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input asp-for="Input.PostalCode" class="form-control" aria-required="true" placeholder="Postal Code" />
@@ -70,7 +73,16 @@
                                                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                                             </div>
                                         </div>
-
+                                        @if (User.IsInRole(StaticDetail.Role_Admin))
+                                        {                                                          
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-control">
+                                                    <option disabled selected>Select Role</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        }
                                         <div class="col-lg-12">
                                             <button type="submit" class="btn">Register</button>
                                         </div>

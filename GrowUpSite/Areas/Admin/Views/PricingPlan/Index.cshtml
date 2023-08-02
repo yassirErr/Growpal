@@ -1,0 +1,114 @@
+﻿@model IEnumerable<GrowUp.Model.PayMonthlyPlan>
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+
+    <div class="page-content">
+
+        <!-- start page title -->
+        <div class="page-title-box">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="page-title">
+                            <h4>Price Month information</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a>Grow UP</a></li>
+                                <li class="breadcrumb-item"><a>Table</a></li>
+                                <li class="breadcrumb-item active">Data Table Price Month information</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="float-end d-none d-sm-block">
+                            <a asp-area="Admin" asp-controller="PricingPlan" asp-action="Create" class="btn btn-success">Add Price Month information</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+
+        <div class="container-fluid">
+
+            <div class="page-content-wrapper">
+
+
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="header-title">All Price Month information</h4>
+
+
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Price Monthly</th>
+                                            <th>Information</th>
+                                            <th>Contact Methode</th>
+                                            <th>Notes</th>
+                                            <th>Status</th>
+                                        </tr>
+
+                                    </thead>
+
+
+
+                                    <tbody>
+                                        @foreach (var obj in Model)
+                                        {
+                                            <tr>
+                                                <td>@obj.PriceMonthly $</td>
+                                                <td>@obj.Information</td>
+                                                <td>@obj.ContactMethode</td>
+                                                <td>@obj.Notes</td>
+                                         
+
+                                                <td>
+                                                    <div class="button-items">
+                                                        <a asp-controller="PricingPlan" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-outline-primary waves-effect waves-light"> Edit </a>
+                                                        <a asp-controller="PricingPlan" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-outline-danger waves-effect waves-light"> Delete </a>
+                                                    </div>
+
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+
+
+            </div>
+
+
+        </div> <!-- container-fluid -->
+    </div>
+    <!-- End Page-content -->
+
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script> © Grow up .
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- end main content-->
