@@ -24,6 +24,12 @@ namespace GrowUpSite.Areas.Customer.Controllers
             return View(payMonthlyPlanEnumerator);
         }
 
+        public IActionResult Payment()
+        {
+            IEnumerable<PayMonthlyPlan> payMonthlyPlanEnumerator = _unitOfWork.PayMonthlyPlan.GetAll();
+            return View(payMonthlyPlanEnumerator);
+          
+        }
         public IActionResult Privacy()
         {
             return View();

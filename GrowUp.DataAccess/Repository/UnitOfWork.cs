@@ -24,6 +24,8 @@ namespace GrowUp.DataAccess.Repository
             Reactube = new ReactubeRepository(db);
             Watchtube = new WatchtubeRepository(db);
             PayMonthlyPlan = new PricingPlanRepository(db);
+            OrderHeader = new OrderHeaderRepository(db);
+            OrderDetail = new OrderDetailRepository(db);
         }
 
         public ICategoryRepository Category { get; private set;}
@@ -35,6 +37,8 @@ namespace GrowUp.DataAccess.Repository
         public IReactubeRepository Reactube { get; private set; }
         public IWatchtubeRepository Watchtube { get; private set; }
         public IPricingPlanRepository PayMonthlyPlan { get; private set; }
+        public IOrderHeaderRepository OrderHeader { get; private set; }
+        public IOrderDetailRepository OrderDetail { get; private set; }
 
         public void Save()
         {

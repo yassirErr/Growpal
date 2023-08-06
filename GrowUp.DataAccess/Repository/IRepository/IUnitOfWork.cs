@@ -16,6 +16,8 @@ namespace GrowUp.DataAccess.Repository.IRepository
             IReactubeRepository Reactube { get; }
             IWatchtubeRepository Watchtube { get; }
             IPricingPlanRepository PayMonthlyPlan { get; }
+            IOrderHeaderRepository OrderHeader { get; }
+            IOrderDetailRepository OrderDetail { get; }
 
         void Save();
     }

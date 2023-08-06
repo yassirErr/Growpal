@@ -20,20 +20,17 @@ namespace GrowUp.DataAccess.Data
 
         }
 
-        public DbSet<Service> Services { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<Contentube> Contentubes { get; set; }
-        public DbSet<Reactube> Reactubes { get; set; }
-        public DbSet<Watchtube> Watchtubes { get; set; }
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<PayMonthlyPlan> PayMonthlyPlans { get; set; }
 
-
-
-
-
-
+            public DbSet<Service> Services { get; set; }
+            public DbSet<Category> Categories { get; set; }
+            public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+            public DbSet<Contentube> Contentubes { get; set; }
+            public DbSet<Reactube> Reactubes { get; set; }
+            public DbSet<Watchtube> Watchtubes { get; set; }
+            public DbSet<Country> Countries { get; set; }
+            public DbSet<PayMonthlyPlan> PayMonthlyPlans { get; set; }
+            public DbSet<OrderHeader> OrderHeaders { get; set; }
+            public DbSet<OrderDetail> OrderDetaills { get; set; }
 
 
     }

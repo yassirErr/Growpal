@@ -1,0 +1,80 @@
+﻿@model GrowUp.Model.PayMonthlyPlan
+@using Microsoft.Extensions.Options
+@inject IOptions<GrowUp.Utility.StripeSettings> Stripe
+<!-- Contact -->
+<div class="contact-area ptb-100">
+    <div class="container">
+        <div class="section-title">
+            <h2>Payment Validation </h2>
+        </div>
+        <form  asp-action="Summary" method="post">
+            <div class="row">
+                <div class="col-sm-6 col-lg-6">
+                    <label>Information</label>
+                    <div class="form-group">
+                        <label>
+                            <i class='bx bx-user'></i>
+                        </label>
+                        <input asp-for="Information" class="form-control" required disabled />
+                        <span asp-validation-for="Information" class="text-danger"></span>
+                       
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+                    <label>
+                        Contact
+                    </label>
+                    <div class="form-group">
+                    
+                        <label>
+                            <i class='bx bx-mail-send'></i>
+                             
+                        </label>
+                 
+                        <input asp-for="ContactMethode" class="form-control" required disabled />
+                        <span asp-validation-for="ContactMethode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+                    <label>
+                        Notes
+                    </label>
+                    <div class="form-group">
+                        <label>
+                            <i class='bx bx-phone-call'></i>
+                        </label>
+                      
+                        <input asp-for="Notes" class="form-control" required disabled />
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+                    <label>
+                        PriceMonthly
+                    </label>
+                    <div class="form-group">
+                        <label>
+                            <i class='bx bxs-edit'></i>
+                        </label>
+                        <input asp-for="PriceMonthly" class="form-control" required disabled/>
+                        <span asp-validation-for="PriceMonthly" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-12">
+                    <input asp-for="Id" type="hidden" />
+                    <button type="submit" class="btn cmn-btn">
+                       Submit
+                        <i class='bx bx-plus'></i>
+                    </button>
+                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End Contact -->
