@@ -42,6 +42,7 @@ namespace GrowUp.DataAccess.DbInitializer
                 {
                     _db.Database.Migrate();
                 }
+
             }
             catch (Exception ex)
             {

@@ -12,7 +12,7 @@ namespace GrowUp.DataAccess.Repository.IRepository
 {
     public interface IContentubeRepository : IRepository<Contentube>
     {
-
+        //int Count(Expression<Func<Contentube, bool>> filter = null);
         void Update(Contentube obj);
     }
 

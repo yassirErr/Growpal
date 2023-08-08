@@ -13,9 +13,10 @@ namespace GrowUp.Model
         public int Id { get; set; }
 
         public double PriceMonthly { get; set; }
-        public string? Information { get; set; }
         public string? ContactMethode { get; set; }
         public string? Notes { get; set; }
- 
+        public string? SelectedOption { get; set; }
+        public string? Period { get; set; }
+
     }
 }

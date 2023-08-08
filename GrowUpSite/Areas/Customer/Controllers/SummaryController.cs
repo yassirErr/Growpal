@@ -112,7 +112,7 @@ namespace GrowUpSite.Areas.Customer.Controllers
                         Currency = "usd",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
-                            Name = item.Information,
+                            Name = item.SelectedOption,
                         },
 
                        

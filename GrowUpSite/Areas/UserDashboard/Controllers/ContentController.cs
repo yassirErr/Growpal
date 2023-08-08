@@ -36,10 +36,13 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             // get the ID of the current user
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
+
+
             // retrieve all Contentube objects for the current user
             IEnumerable<Contentube> objContentList = _unitOfWork.Content.GetAll().Where(c => c.ApplicationUserId == userId);
-
             return View(objContentList);
+
+
         }
 
 
@@ -95,14 +98,11 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
 
 
-
-
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(ContentVM obj)
         {
-
 
             if (ModelState.IsValid)
             {
@@ -114,6 +114,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                 var categoryExists = _unitOfWork.Category.GetFirstOrDefault(c => c.Id == obj.Content.Category_typeId) != null;
                 var serviceExists = _unitOfWork.Service.GetFirstOrDefault(c => c.Id == obj.Content.Service_typeId) != null;
                 var countryExists = _unitOfWork.Country.GetFirstOrDefault(c => c.id == obj.Content.Country_nameId) != null;
+
                 if (!categoryExists)
                 {
                     ModelState.AddModelError(nameof(ContentVM.Content.Category_typeId), "Invalid category type");
@@ -146,10 +147,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
 
             return View(obj);
         }
-
-
-
-
 
 
         //GET
@@ -248,16 +245,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                 IEnumerable<Reactube> reactubeList;
                 switch (range)
                 {
-                    case "1-2":
-                        reactubeList = _unitOfWork.Reactube.GetAll(
-                            r => r.Content.Category_typeId == categoryTypeId &&
-                            r.Content.Service_typeId == serviceTypeId &&
-                            r.ItemVideo != currentUserId &&
-                            r.ApplicationUserId != currentUserId &&
-                            r.Status == false,
-                            includeProperties: "Content"
-                        ).OrderBy(r => r.Id).Take(2);
-                        break;
                     case "1-5":
                         reactubeList = _unitOfWork.Reactube.GetAll(
                             r => r.Content.Category_typeId == categoryTypeId &&
@@ -267,16 +254,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                             r.Status == false,
                             includeProperties: "Content"
                         ).OrderBy(r => r.Id).Take(5);
-                        break;
-                    case "1-8":
-                        reactubeList = _unitOfWork.Reactube.GetAll(
-                            r => r.Content.Category_typeId == categoryTypeId &&
-                            r.Content.Service_typeId == serviceTypeId &&
-                            r.ItemVideo != currentUserId &&
-                            r.ApplicationUserId != currentUserId &&
-                            r.Status == false,
-                            includeProperties: "Content"
-                        ).OrderBy(r => r.Id).Take(8);
                         break;
                     case "1-10":
                         reactubeList = _unitOfWork.Reactube.GetAll(
@@ -288,8 +265,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                             includeProperties: "Content"
                         ).OrderBy(r => r.Id).Take(10);
                         break;
-
-
                     case "1-15":
                         reactubeList = _unitOfWork.Reactube.GetAll(
                             r => r.Content.Category_typeId == categoryTypeId &&
@@ -300,6 +275,28 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                             includeProperties: "Content"
                         ).OrderBy(r => r.Id).Take(15);
                         break;
+                    case "1-20":
+                        reactubeList = _unitOfWork.Reactube.GetAll(
+                            r => r.Content.Category_typeId == categoryTypeId &&
+                            r.Content.Service_typeId == serviceTypeId &&
+                            r.ItemVideo != currentUserId &&
+                            r.ApplicationUserId != currentUserId &&
+                            r.Status == false,
+                            includeProperties: "Content"
+                        ).OrderBy(r => r.Id).Take(20);
+                        break;
+
+
+                    case "1-25":
+                        reactubeList = _unitOfWork.Reactube.GetAll(
+                            r => r.Content.Category_typeId == categoryTypeId &&
+                            r.Content.Service_typeId == serviceTypeId &&
+                            r.ItemVideo != currentUserId &&
+                            r.ApplicationUserId != currentUserId &&
+                            r.Status == false,
+                            includeProperties: "Content"
+                        ).OrderBy(r => r.Id).Take(25);
+                        break;
                     default:
                         reactubeList = _unitOfWork.Reactube.GetAll(
                             r => r.Content.Category_typeId == categoryTypeId &&
@@ -308,7 +305,7 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
                             r.ApplicationUserId != currentUserId &&
                             r.Status == false,
                             includeProperties: "Content"
-                        ).OrderBy(r => r.Id).Take(2);
+                        ).OrderBy(r => r.Id).Take(5);
                         break;
                 }
 

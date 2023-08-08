@@ -23,16 +23,6 @@ namespace GrowUpSite.Areas.Admin.Controllers
         {
 
           IEnumerable<PayMonthlyPlan> PayMonthList = _unitOfWork.PayMonthlyPlan.GetAll();
-            //List<string> payMonthInfoList = new List<string>();
-
-            //foreach (var item in PayMonthList)
-            //{
-            //    var user = _unitOfWork.ApplicationUser.GetFirstOrDefault(u => u.Id == item.ApplicationUserId)?.Name;
-            //    string PayInfo = $"{user}";
-            //    payMonthInfoList.Add(PayInfo);
-            //}
-
-            //ViewBag.PayMonthInfoList = payMonthInfoList;
             return View(PayMonthList);
         }
 
@@ -48,10 +38,10 @@ namespace GrowUpSite.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(PayMonthlyPlan obj)
         {
-            if (obj.PriceMonthly==0)
-            {
-                ModelState.AddModelError("Information", "Should Enter Value");
-            }
+            //if (obj.PriceMonthly==0)
+            //{
+            //    ModelState.AddModelError("Information", "Should Enter Value");
+            //}
 
             if (ModelState.IsValid)
             {
