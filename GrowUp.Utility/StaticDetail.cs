@@ -23,5 +23,7 @@ namespace GrowUp.Utility
         public const string PaymentStatusApproved = "Approved";
         public const string PaymentStatusRejected = "Rejected";
 
+        public const string SessionCounter= "SessionCountNumber";
+
     }
 }

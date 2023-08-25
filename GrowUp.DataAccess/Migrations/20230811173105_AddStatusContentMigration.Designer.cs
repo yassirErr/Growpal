@@ -4,6 +4,7 @@ using GrowUp.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrowUp.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230811173105_AddStatusContentMigration")]
+    partial class AddStatusContentMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +42,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Contentube", b =>
@@ -88,7 +91,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("Service_typeId");
 
-                    b.ToTable("Contentubes", (string)null);
+                    b.ToTable("Contentubes");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Country", b =>
@@ -109,7 +112,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("GrowUp.Model.OrderDetail", b =>
@@ -135,7 +138,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("PayMonthlyPlanId");
 
-                    b.ToTable("OrderDetaills", (string)null);
+                    b.ToTable("OrderDetaills");
                 });
 
             modelBuilder.Entity("GrowUp.Model.OrderHeader", b =>
@@ -178,7 +181,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("OrderHeaders", (string)null);
+                    b.ToTable("OrderHeaders");
                 });
 
             modelBuilder.Entity("GrowUp.Model.PayMonthlyPlan", b =>
@@ -206,7 +209,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PayMonthlyPlans", (string)null);
+                    b.ToTable("PayMonthlyPlans");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Reactube", b =>
@@ -237,7 +240,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("ContentId");
 
-                    b.ToTable("Reactubes", (string)null);
+                    b.ToTable("Reactubes");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Service", b =>
@@ -257,7 +260,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services", (string)null);
+                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("GrowUp.Model.Watchtube", b =>
@@ -293,7 +296,7 @@ namespace GrowUp.DataAccess.Migrations
 
                     b.HasIndex("ReactubeId");
 
-                    b.ToTable("Watchtubes", (string)null);
+                    b.ToTable("Watchtubes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

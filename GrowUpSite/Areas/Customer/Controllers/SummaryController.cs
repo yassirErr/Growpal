@@ -90,7 +90,7 @@ namespace GrowUpSite.Areas.Customer.Controllers
             //stripe configuration
 
 
-            var domain = "https://localhost:44382/";
+            var domain = "https://growpal.azurewebsites.net/";
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>(),

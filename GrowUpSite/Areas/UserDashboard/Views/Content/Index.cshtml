@@ -45,11 +45,15 @@
                                     @foreach (var obj in Model)
                                     {
                                         <tr>
-                                            <td>@obj.Content_name</td>
+                                            <td >@obj.Content_name</td>
                                             <td style="width:15px">@obj.Content_Url</td>
 
                                             <td>
                                                 <div class="button-items">
+                                                    @if (obj.StatusContent == false)
+                                                    {
+                                                        <span>No Action</span>
+                                                    }else{
 
                                                     <a asp-controller="Content" asp-action="Show" asp-route-id="@obj.Id" class="btn btn-outline-secondary waves-effect waves-light" style="width:150px"> Show  </a>
 
@@ -63,6 +67,7 @@
                                                         <button type="button" onclick="ConfirmDelete()" class="btn btn-outline-danger waves-effect waves-light" style="width:150px">Delete</button>
                                                     </form>
 
+                                                    }
 
                                                 </div>
                                             </td>

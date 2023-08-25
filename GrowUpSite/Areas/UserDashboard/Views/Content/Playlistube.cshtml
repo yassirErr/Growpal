@@ -1,13 +1,17 @@
-﻿@model (IEnumerable<GrowUp.Model.Reactube> ReactubeList, int, int, int)
+﻿
+@model (IEnumerable<GrowUp.Model.Reactube> ReactubeList, int, int, int)
+
 @{
     int insertedByOthersCount = ViewBag.InsertedByOthersCount ?? 0;
     int watchtubeCount = ViewBag.WatchtubeCount ?? 0;
 }
 
 
+
 @{
     ViewData["Title"] = "Playlistube";
 }
+
 
 <div class="page-content">
 
@@ -35,15 +39,30 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+
+
                             @if (insertedByOthersCount > watchtubeCount)
                             {
                                 <div class="alert alert-danger border-0" role="alert">
                                     <i class="mdi mdi-alert-outline alert-icon"></i>
-                                    <strong>Well done!</strong> You successfully read this important alert message.
+                                    <strong> Warning : You Have 24 Hours </strong> You must complete watching as the same views that you have before the time runs out or <strong> Your content get Banned  </strong>.
                                 </div>
-                      
+
+                                <div class="alert alert-outline-warning alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true"><i class="mdi mdi-close"></i></span>
+                                    </button>
+                                    <strong> Info !</strong>You have to stop Videos running in playlist and complete the watching the list that you have.
+                                </div>
+
                             }
 
+                            
+                            @if (ViewBag.StartTimer)
+                            {
+                                <p id="timer">0:00:00</p>
+
+                            }
 
                             <div class="card-body bg-light chart-report-card">
                                 <div class="row d-flex justify-content-between">
@@ -53,8 +72,7 @@
                                                 <i class="dripicons-preview report-main-icon bg-card text-dark mr-2"></i>                                      
                                                 <div class="media-body align-self-center text-truncate">
                                         <h4 class="mt-0 mb-0 font-weight-semibold text-dark font-24">
-                                            @Model.Item3
-                                         
+                                                        @Model.Item3
                                                     </h4>
                                                 <p class="text-dark font-weight-semibold mb-0 font-14">Watching</p>
                                             </div><!--end media-body-->
@@ -68,7 +86,6 @@
                                             <div class="media-body align-self-center text-truncate">
                                                 <h4 class="mt-0 mb-0 font-weight-semibold text-dark font-24">
                                                     @Model.Item4
-                                                  
                                                 </h4>
                                                 <p class="text-dark font-weight-semibold mb-0 font-14">Views</p>
                                             </div><!--end media-body-->
@@ -85,7 +102,7 @@
                             <label class="col-sm-2 col-form-label text-right" for="range-select">Selected range:</label>
                                 <div class="col-sm-2">
                                 <select class="custom-select" name="range" id="range-select">
-                                    <option selected disabled hidden>Open this select menu</option>
+                                    <option selected disabled hidden> Select Menu </option>
                                     <option value="1-2">1-5</option>
                                     <option value="1-5">1-10</option>
                                     <option value="1-8">1-15</option>
@@ -134,7 +151,9 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
+    // range selection
     $(document).ready(function () {
         $('#range-select').on('change', function () {
             var rangeValue = $(this).val();
@@ -143,7 +162,7 @@
         });
     });
 
-
+    // add to watchtube table 
     function handleClick(reactubeId, videoLink) {
         $.ajax({
             url: '@Url.Action("AddToWatchtube", "Content")',
@@ -164,10 +183,57 @@
 
                 // show an alert message
                 alert("Video added to Watchtube");
+
+                // Load a new page
+                window.location.href = 'https://localhost:44382/UserDashboard/Content/Playlistube';
             },
             error: function () {
                 alert("Error: Failed to add video to Watchtube");
             }
         });
     }
+
+    // check timer counter and change UpdateStatusContent
+
+    var timerElement = document.getElementById("timer");
+    var startTime = localStorage.getItem("startTime");
+    var isCountingStopped = false;
+
+    if (!startTime || @insertedByOthersCount <= @watchtubeCount) {
+        startTime = new Date().getTime();
+        localStorage.setItem("startTime", startTime);
+    }
+
+    function updateTimer() {
+        var currentTime = new Date().getTime();
+        var elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
+        var hours = Math.floor(elapsedSeconds / 3600);
+        var minutes = Math.floor((elapsedSeconds % 3600) / 60);
+        var seconds = elapsedSeconds % 60;
+
+        var timerText = hours + ":" + (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+        timerElement.innerText = timerText;
+
+        if (hours >= 24 && !isCountingStopped) {
+            clearInterval(timerInterval); // Stop the timer
+            isCountingStopped = true;
+
+            // Make an AJAX call to update the StatusContent to false
+            $.ajax({
+                url: '@Url.Action("UpdateStatusContent","Content")',
+                type: 'POST',
+                success: function (response) {
+                    console.log('StatusContent updated successfully.');
+                },
+                error: function (error) {
+                    console.error('Failed to update StatusContent:', error);
+                }
+            });
+        }
+    }
+
+    var timerInterval = setInterval(updateTimer, 1000); // Update timer every 1 second
+
+    updateTimer(); // Update timer immediately
+
 </script>

@@ -1,6 +1,7 @@
 ﻿using GrowUp.DataAccess.Data;
 using GrowUp.DataAccess.Repository.IRepository;
 using GrowUp.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace GrowUp.DataAccess.Repository
             PayMonthlyPlan = new PricingPlanRepository(db);
             OrderHeader = new OrderHeaderRepository(db);
             OrderDetail = new OrderDetailRepository(db);
+      
         }
 
         public ICategoryRepository Category { get; private set;}
@@ -39,10 +41,17 @@ namespace GrowUp.DataAccess.Repository
         public IPricingPlanRepository PayMonthlyPlan { get; private set; }
         public IOrderHeaderRepository OrderHeader { get; private set; }
         public IOrderDetailRepository OrderDetail { get; private set; }
+   
+
 
         public void Save()
         {
             _db.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _db.Dispose();
         }
     }
 }

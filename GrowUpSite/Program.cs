@@ -2,6 +2,7 @@ using GrowUp.DataAccess.Data;
 using GrowUp.DataAccess.DbInitializer;
 using GrowUp.DataAccess.Repository;
 using GrowUp.DataAccess.Repository.IRepository;
+using GrowUp.Model;
 using GrowUp.Utility;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -25,9 +26,19 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProvid
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
-
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddHttpContextAccessor();
+
+//Session
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 
 //configure default url 
@@ -68,6 +79,7 @@ SeedDataBase();
 app.UseAuthentication(); ;
 
 app.UseAuthorization();
+app.UseSession();
 app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",

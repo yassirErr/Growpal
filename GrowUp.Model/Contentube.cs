@@ -57,5 +57,7 @@ namespace GrowUp.Model
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
 
+        public bool StatusContent { get; set; }
+
     }
 }

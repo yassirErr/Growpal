@@ -31,6 +31,7 @@ namespace GrowUp.DataAccess.Data
             public DbSet<PayMonthlyPlan> PayMonthlyPlans { get; set; }
             public DbSet<OrderHeader> OrderHeaders { get; set; }
             public DbSet<OrderDetail> OrderDetaills { get; set; }
+         
 
 
     }

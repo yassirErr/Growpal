@@ -55,7 +55,7 @@
 
                                                 <div class="button-items">
 
-                                                    <button id="toggleButton-@obj.Id" class="btn btn-@(obj.Status ? "primary" : "danger") btn-lg toggleButton" data-id="@obj.Id" onclick="toggleButtonClicked(@obj.Id)">@(obj.Status ? "Start" : "Stop")</button>
+                                                    <button id="toggleButton-@obj.Id" class="btn btn-@(obj.Status ? "danger" : "primary") btn-lg toggleButton" data-id="@obj.Id" onclick="toggleButtonClicked(@obj.Id)">@(obj.Status ? "Stop" : "Start")</button>
                           
 
 
@@ -88,8 +88,8 @@
             type: 'POST',
             data: { id: id },
             success: function (result) {
-                button.text(result.status ? 'Start' : 'Stop');
-                button.removeClass('btn-primary btn-danger').addClass(result.status ? 'btn-primary' : 'btn-danger');
+                button.text(result.status ? 'Stop' : 'Start');
+                button.removeClass('btn-danger btn-primary').addClass(result.status ? 'btn-danger' : 'btn-primary');
             },
             error: function (xhr, status, error) {
                 console.log(error);
