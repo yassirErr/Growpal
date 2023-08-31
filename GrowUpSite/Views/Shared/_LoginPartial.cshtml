@@ -8,7 +8,7 @@
 
 
  
-<ul class="side-nav">
+<div class="side-nav">
 
         @if (SignInManager.IsSignedIn(User))
         {
@@ -30,7 +30,7 @@
             string currentUserId = UserManager.GetUserId(User);
             var orderHeader = _unitofwork.OrderHeader.GetFirstOrDefault(o => o.ApplicationUserId == currentUserId);
 
-            @if (orderHeader != null)
+            @if (orderHeader != null && orderHeader.PaymentItentId != null)
             {
                 <li class="scroll-to-section">
                     <a asp-area="UserDashboard" asp-controller="User" asp-action="Index" class="cmn-btn">
@@ -74,4 +74,4 @@ else
 
        
 }
-</ul>
+</div>

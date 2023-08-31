@@ -32,7 +32,7 @@ namespace GrowUp.Model
 
         public string? SessionId { get; set; }// strape payments
 
-        public string? PaymenyIntentId { get; set; }// strape payments
+        public string? PaymentItentId { get; set; }// strape payments
 
     }
 }

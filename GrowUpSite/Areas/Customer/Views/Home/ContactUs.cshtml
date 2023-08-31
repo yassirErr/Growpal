@@ -1,0 +1,80 @@
+﻿@model GrowUp.Model.Contact
+ 
+<!-- Contact -->
+<div class="contact-area ptb-100">
+    <div class="container">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+          
+        </div>
+
+        <form method="post">
+            <div id="contactForm" class="row">
+                <div class="col-sm-6 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="Name">
+
+                            <i class='bx bx-user'></i>
+                        </label>
+                        <input type="text"  class="form-control" placeholder="Name*" asp-for="Name" required data-error="Please enter your name">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="Email" >
+                            <i class='bx bx-mail-send'></i>
+                        </label>
+                        <input type="email"  class="form-control" placeholder="Email" asp-for="Email" required data-error="Please enter your email">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber">
+                            <i class='bx bx-phone-call'></i>
+                        </label>
+                        <input type="text" placeholder="Phone" asp-for="PhoneNumber" required data-error="Please enter your number" class="form-control">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-6">
+                    <div class="form-group">
+                        <label asp-for="Subject">
+                            <i class='bx bxs-edit'></i>
+                        </label>
+                        <input type="text" class="form-control" placeholder="Subject" asp-for="Subject" required data-error="Please enter your subject">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label asp-for="Message">
+                            <i class='bx bx-comment-detail'></i>
+                        </label>
+                        <textarea asp-for="Message" class="form-control"  cols="30" rows="8" placeholder="Write message" required data-error="Write your message"></textarea>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-12">
+                    <button type="submit" class="btn cmn-btn">
+                        Send Message
+                        <i class='bx bx-plus'></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End Contact -->
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+                        

@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="~/site/assets/img/GpIcon.png">
+    <link rel="shortcut icon" href="~/site/assets/img/faviconGP.png">
 
     <!-- jvectormap -->
     <link href="~/site/dashboard/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
@@ -30,6 +30,7 @@
     <link href="~/site/dashboard/plugins/dropify/css/dropify.min.css" rel="stylesheet">
     <link href="~/site/dashboard/plugins/filter/magnific-popup.css" rel="stylesheet" type="text/css" />
     <link href="~/site/dashboard/plugins/lightpick/lightpick.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css"/>
 
 
@@ -44,11 +45,9 @@
         <div class="topbar-left">
             <a asp-area="UserDashboard" asp-controller="User" asp-action="index" class="logo">
                 <span>
-                    <img src="~/admin/assets/images/Gp.png" class="logo-sm-pal">
+                    <img src="~/admin/assets/images/GP.png" class="logo-sm">
                 </span>
-                <span>
-                    <img src="~/admin/assets/images/Growpal.png" alt="logo-large" class="logo-lg logo-light">
-                </span>
+             
             </a>
         </div>
         <!--end logo-->
@@ -236,6 +235,7 @@
     <!-- end left-sidenav-->
 
     <div class="page-wrapper">
+        <partial name="_Notification" />
         <!-- Start right Content here -->
         @RenderBody()
         <!-- end main content-->

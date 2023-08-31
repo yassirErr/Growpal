@@ -143,7 +143,6 @@ namespace GrowUpSite.Areas.Customer.Controllers
                 _unitOfWork.OrderHeader.UpdateStripePaymentID(id, orderHeader.SessionId, session.PaymentIntentId);
                 _unitOfWork.OrderHeader.UpdateStatus(id, StaticDetail.StatusPending, StaticDetail.PaymentStatusPending);
                 _unitOfWork.Save();
-
             }
             _unitOfWork.Save();
             return View(id);

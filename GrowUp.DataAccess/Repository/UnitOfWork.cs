@@ -27,7 +27,9 @@ namespace GrowUp.DataAccess.Repository
             PayMonthlyPlan = new PricingPlanRepository(db);
             OrderHeader = new OrderHeaderRepository(db);
             OrderDetail = new OrderDetailRepository(db);
-      
+            Contact = new ContactRepository(db); 
+
+
         }
 
         public ICategoryRepository Category { get; private set;}
@@ -41,7 +43,8 @@ namespace GrowUp.DataAccess.Repository
         public IPricingPlanRepository PayMonthlyPlan { get; private set; }
         public IOrderHeaderRepository OrderHeader { get; private set; }
         public IOrderDetailRepository OrderDetail { get; private set; }
-   
+        public IContactRepository Contact { get; private set; }
+
 
 
         public void Save()

@@ -24,6 +24,26 @@ namespace GrowUpSite.Areas.Customer.Controllers
             return View(payMonthlyPlanEnumerator);
         }
 
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ContactUs(Contact obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.Contact.Add(obj);
+                _unitOfWork.Save();
+                TempData["success"] = " Your Message Has Been successfully Sent ";
+                return RedirectToAction("Index");
+            }
+          
+            return View(obj);
+        }
+
         public IActionResult Payment()
         {
             IEnumerable<PayMonthlyPlan> payMonthlyPlanEnumerator = _unitOfWork.PayMonthlyPlan.GetAll();

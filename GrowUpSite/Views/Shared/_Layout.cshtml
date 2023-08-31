@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>@ViewData["Title"] - GrowUpSite</title>
 
     <link rel="stylesheet" href="~/site/assets/css/bootstrap.min.css">
@@ -30,11 +31,14 @@
     <!-- Theme Dark CSS -->
     <link rel="stylesheet" href="~/site/assets/css/theme-dark.css">
 
-    <title>Growpal </title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
-    <link rel="icon" type="image/png" href="~/site/assets/img/favicon.png">
+    <title> Growpal </title>
+
+    <link rel="icon" type="image/png" href="~/site/assets/img/faviconGP.png">
 </head>
 <body>
+
     <!-- Preloader -->
     <div class="loader">
         <div class="d-table">
@@ -50,11 +54,12 @@
         </div>
     </div>
     <!-- End Preloader -->
+
     <!-- Start Navbar Area -->
     <div class="navbar-area fixed-top">
         <!-- Menu For Mobile Device -->
         <div class="mobile-nav">
-            <a href="sass.html" class="logo">
+            <a class="logo" asp-area="Customer" asp-controller="Home" asp-action="index">
                 <img src="~/site/assets/img/logo-two.png" alt="Logo">
             </a>
         </div>
@@ -64,7 +69,7 @@
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md navbar-light">
                     <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="index">
-                        <img src="~/site/assets/img/Gp.png" class="logo-one" alt="Logo">
+                        <img src="~/site/assets/img/Growpal.png" class="logo-one" alt="Logo">
               
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
@@ -85,7 +90,7 @@
 
                    
                             <li class="nav-item">
-                                <a href="#contact" class="nav-link">Contact</a>
+                                <a asp-area="Customer" asp-controller="Home" asp-action="ContactUs" class="nav-link">Contact</a>
                             </li>
 
                             <li class="nav-item">
@@ -107,6 +112,7 @@
 
 
     <main role="main" class="pb-3">
+        <partial name="_Notification"/>
         @RenderBody()
     </main>
 
@@ -119,7 +125,7 @@
                     <div class="footer-item">
                         <div class="footer-logo">
                             <a href="sass.html">
-                                <img src="~/site/assets/img/gpAR.png" alt="Logo">
+                                <img src="~/site/assets/img/GrowpalFT.png" alt="Logo">
                             </a>
                             <p>Social Media Management Suite is a great title that effectively communicates the purpose of your platform. It suggests that your platform is a comprehensive tool for managing social media, which can be appealing to individuals and businesses looking for an all-in-one solution to manage their online presence.</p>
                         </div>
@@ -138,7 +144,7 @@
                                     <a href="#service" >Services</a>
                                 </li>
                                 <li>
-                                    <a href="#contact" >Contact</a>
+                                    <a asp-area="Customer" asp-controller="Home" asp-action="ContactUs">Contact</a>
                                 </li>
                                 <li>
                                     <a href="#Pricing" >Our Pricing</a>

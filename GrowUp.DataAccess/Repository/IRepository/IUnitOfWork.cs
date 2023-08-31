@@ -19,7 +19,8 @@ namespace GrowUp.DataAccess.Repository.IRepository
             IPricingPlanRepository PayMonthlyPlan { get; }
             IOrderHeaderRepository OrderHeader { get; }
             IOrderDetailRepository OrderDetail { get; }
-   
+            IContactRepository Contact { get; }
+
 
         void Save();
 

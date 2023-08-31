@@ -10,19 +10,15 @@
     <Compile Remove="wwwroot\css\**" />
     <Compile Remove="wwwroot\images\**" />
     <Compile Remove="wwwroot\js\**" />
-    <Compile Remove="wwwroot\lib\**" />
     <Content Remove="wwwroot\css\**" />
     <Content Remove="wwwroot\images\**" />
     <Content Remove="wwwroot\js\**" />
-    <Content Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="wwwroot\css\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="wwwroot\js\**" />
-    <EmbeddedResource Remove="wwwroot\lib\**" />
     <None Remove="wwwroot\css\**" />
     <None Remove="wwwroot\images\**" />
     <None Remove="wwwroot\js\**" />
-    <None Remove="wwwroot\lib\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,6 +73,9 @@
     <None Include="wwwroot\admin\assets\libs\jquery.easing\bower_components\jquery-easing-original\jquery.easing.compatibility.js" />
     <None Include="wwwroot\admin\assets\libs\jquery.easing\bower_components\jquery-easing-original\jquery.easing.min.js" />
     <None Include="wwwroot\admin\assets\libs\jquery.easing\bower_components\jquery\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
     <None Include="wwwroot\site\dashboard\assets\webfonts\fa-brands-400.woff2" />
     <None Include="wwwroot\site\dashboard\assets\webfonts\fa-regular-400.woff2" />
     <None Include="wwwroot\site\dashboard\assets\webfonts\fa-solid-900.woff2" />
@@ -102,7 +101,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.15" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
     <PackageReference Include="Stripe.net" Version="41.27.0" />
   </ItemGroup>
 

@@ -500,11 +500,6 @@ namespace GrowUpSite.Areas.UserDashboard.Controllers
             return Json(new { success = true });
         }
 
-  
-
-
-
-
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -27,45 +27,43 @@
             </div>
         </div>
         <!-- end page title -->
-<form action="" method="post">
+        <form action="" method="post">
 
-        <div class="container-fluid">
+            <div class="container-fluid">
 
-            <div class="page-content-wrapper">
+                <div class="page-content-wrapper">
 
 
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
 
-                                <h4 class="header-title">Create New Category</h4>
+                                    <h4 class="header-title">Create New Category</h4>
                              
-                                <div class="row mb-3">
-                                    <label asp-for="CategoryName" class="col-sm-2 col-form-label">Category Name</label>
-                                    <div class="col-sm-10">
-                                            <input class="form-control" type="text" placeholder="Type the category name" asp-for="CategoryName">
+                                    <div class="row mb-3">
+                                        <label asp-for="CategoryName" class="col-sm-2 col-form-label">Category Name</label>
+                                        <div class="col-sm-10">
+                                                <input class="form-control" type="text" placeholder="Type the category name" asp-for="CategoryName">
+                                        </div>
                                     </div>
-                                </div>
                              
 
+                                </div>
                             </div>
-                        </div>
-                    </div> <!-- end col -->
-                </div>
-                <!-- end row -->
-                    <button class="btn btn-success waves-effect waves-light" type="submit" style="width:150px"> Create </button>
-                    <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150x">
-                        Back To the List
-                    </a>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                        <button class="btn btn-success waves-effect waves-light" type="submit" style="width:150px"> Create </button>
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150x">
+                            Back To the List
+                        </a>
 
-                   
-
+                    </div>
             </div>
 
-
-        </div> <!-- container-fluid -->
         </form>
-    </div>
+</div>
+    
     <!-- End Page-content -->
