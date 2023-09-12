@@ -82,5 +82,31 @@ namespace GrowUpSite.Areas.Admin.Controllers
             TempData["success"] = "Content Deleted successfully";
             return RedirectToAction("Index");
         }
+
+        public IActionResult ContentRepo() 
+        {
+            IEnumerable<Contentube> contenRepo = _unitOfWork.Content.GetAll().Where(c=>c.StatusContent==false);
+            return View(contenRepo); 
+
+        }
+
+        public ActionResult ChangeContentStatus(int? id)
+        {
+            var contentRepo = _unitOfWork.Content.GetFirstOrDefault(r => r.Id == id);
+
+            if (contentRepo == null)
+            {
+                return NotFound();
+            }
+
+            contentRepo.StatusContent = !contentRepo.StatusContent; // toggle the status
+
+            _unitOfWork.Content.Update(contentRepo);
+            _unitOfWork.Save();
+
+
+            return RedirectToAction("ContentRepo");
+
+        }
     }
 }

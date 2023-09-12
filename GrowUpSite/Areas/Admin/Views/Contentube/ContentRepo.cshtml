@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<GrowUp.Model.Contentube>
+
 <div class="main-content">
 
     <div class="page-content">
@@ -9,11 +10,11 @@
                 <div class="row align-items-center">
                     <div class="col-sm-6">
                         <div class="page-title">
-                            <h4>Customers</h4>
+                            <h4>Dashoboard</h4>
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a>Growpal</a></li>
                                 <li class="breadcrumb-item"><a>Youtube</a></li>
-                                <li class="breadcrumb-item active">Content</li>
+                                <li class="breadcrumb-item active">Content Report</li>
                             </ol>
                         </div>
                     </div>
@@ -47,11 +48,7 @@
                                                 <th>Content Name</th>
                                                 <th>Description</th>
                                                 <th>Content URL</th>
-                                                <th>Category</th>
-                                                <th>Service</th>
-                                                <th>Country Name</th>
-                                                <th>Users</th>
-                                                <th>Contentube Status</th>
+                                                <th>Status Content</th>
 
                                                 <th style="width: 120px;">Action</th>
                                             </tr>
@@ -70,31 +67,28 @@
                                                     <td>@obj.Content_name</td>
                                                     <td>@obj.Description</td>
                                                     <td>@obj.Content_Url</td>
-                                                    <td>@obj.Category.CategoryName</td>
-                                                    <td>@obj.Service.ServiceName</td>
-                                                    <td>@obj.Country.CountryName </td>
-                                                    <td>@obj.ApplicationUser.Name</td>
-                                                    @if (obj.StatusContent == true)
+
+                                                    @if (obj.StatusContent)
                                                     {
-                                                        <td><span class="badge badge-pill badge-soft-success font-size-13">Proved</span></td>
-                                                    }else
+                                                        <td>
+                                                            <span class="badge badge-pill badge-soft-success font-size-13">Proved</span>
+                                                        </td>
+                                                    }
+                                                    else
                                                     {
                                                         <td>
                                                             <span class="badge badge-pill badge-soft-danger font-size-13">Unproved</span>
                                                         </td>
                                                     }
 
-                                                    <td >
-                                                        <div class="button-items">
-                                                            <a asp-area="Admin" asp-controller="Contentube" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-outline-danger waves-effect waves-light"> Delete </a>
-                                                        </div>
-                                             
+                                                    <td>
+                                                        <form asp-area="Admin" asp-controller="Contentube" asp-action="ChangeContentStatus" asp-route-id="@obj.Id" method="post">
+                                                            <button type="submit" class="btn btn-outline-danger waves-effect waves-light" style="width:150px">Change Status</button>
+                                                        </form>
                                                     </td>
 
-
-           
+                                                 
                                                 </tr>
-
                                             }
                                         </tbody>
                                     </table>
