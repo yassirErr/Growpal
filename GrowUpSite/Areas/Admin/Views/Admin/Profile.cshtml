@@ -1,0 +1,119 @@
+﻿@using GrowUpSite.Areas.Identity.Pages.Account.Manage;
+@using Microsoft.AspNetCore.Identity;
+@model GrowUp.Model.ViewModels.ApplicationUserVM;
+
+
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+    <div class="page-content">
+        <!-- start page title -->
+        <div class="page-title-box">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <div class="page-title">
+                            <h4>Profile</h4>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a>GrowPal</a></li>
+                                                                                    
+                                <li class="breadcrumb-item active">Profile</li>
+                            </ol>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+            <div class="container-fluid">
+
+                <div class="page-content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="twitter-bs-wizard">
+                                    <ul class="twitter-bs-wizard-nav">
+                                        <li class="nav-item">
+                                            <a  asp-area="Admin" asp-area="Admin" asp-controller="Admin" asp-action="Profile" class="nav-link" type="button">
+                                                Basic Info
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                           
+
+                                        <div class="tab-pane">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="mb-3">
+                                                            <label asp-for="ApplicationUser.Name" class="form-label"> User Name</label>
+                                                            <input type="text" asp-for="ApplicationUser.Name" class="form-control" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="mb-3">
+                                                            <label asp-for="ApplicationUser.PhoneNumber" class="form-label"> Phone Number </label>
+                                                            <input type="text" asp-for="ApplicationUser.PhoneNumber" class="form-control" disabled>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <div class="mb-3">
+                                                            <label asp-for="ApplicationUser.CountyNameId" class="form-label"> Country </label>
+                                                            <select asp-for="ApplicationUser.CountyNameId" id="CountyNameId" asp-items="@Model.CountryListItem" class="form-control" disabled>
+                                                                <option disabled selected>Selecet Country name</option >
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="mb-3">
+                                                            <label asp-for="ApplicationUser.Email" class="form-label"> Email </label>
+                                                            <input asp-for="ApplicationUser.Email" type="text" class="form-control" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+            </div>
+
+
+            </div> <!-- container-fluid -->
+    </div>
+</div>
+    <!-- End Page-content -->
+
+
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <script>document.write(new Date().getFullYear())</script> © Growup.
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- end main content-->

@@ -17,6 +17,14 @@
     <link href="~/site/dashboard/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="~/site/dashboard/assets/css/all.min.css" rel="stylesheet" type="text/css" />
     <link href="~/site/dashboard/assets/css/fontawesome.min.css rel="stylesheet" type="text/css" />
+    <!-- twitter-bootstrap-wizard css -->
+    <link rel="stylesheet" href="~/admin/assets/libs/twitter-bootstrap-wizard/prettify.css">
+
+    <!-- select2 css -->
+    <link href="~/admin/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- dropzone css -->
+    <link href="~/admin/assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
     <link href="~/admin/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -40,23 +48,16 @@
 
                        <!-- LOGO -->
                  <div class="navbar-brand-box">
-                    <a href="index.html" class="logo logo-dark">
+                        <a asp-controller="Admin" asp-action="Index" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
+                            <img src="~/admin/assets/images/GP.png" alt="" height="22">
                         </span>
                         <span class="logo-lg">
-                            <img src="assets/images/logo-dark.png" alt="" height="20">
+                                <img src="~/admin/assets/images/Growpal.png" alt="" >
                         </span>
                     </a>
 
-                    <a href="index.html" class="logo logo-light">
-                        <span class="logo-sm">
-                            <img src="assets/images/logo-sm.png" alt="" height="22">
-                        </span>
-                        <span class="logo-lg">
-                            <img src="assets/images/logo-light.png" alt="" height="20">
-                        </span>
-                    </a>
+                 
                 </div>
 
                     <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
@@ -80,7 +81,7 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <a class="dropdown-item" disable><i class="mdi mdi-account-circle-outline font-size-16 align-middle me-1"></i> Profile</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="Admin" asp-action="Profile"><i class="mdi mdi-account-circle-outline font-size-16 align-middle me-1"></i> Profile</a>
                             <a class="dropdown-item" disable><i class="mdi mdi-wallet-outline font-size-16 align-middle me-1"></i> My Wallet</a>
                             <div class="dropdown-divider"></div>
                               <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -105,12 +106,12 @@
                 <div class="user-sidebar text-center">
                     <div class="dropdown">
                         <div class="user-img">
-                            <img src="assets/images/users/avatar-7.jpg" alt="" class="rounded-circle">
+                            <img src="~/admin/assets/images/admin.jpg" alt="" class="rounded-circle">
                             <span class="avatar-online bg-success"></span>
                         </div>
                         <div class="user-info">
-                            <h5 class="mt-3 font-size-16 text-white">@User.Identity.Name!</h5>
-                            <span class="font-size-13 text-white-50">Administrator</span>
+                            <h5 class="mt-3 font-size-16 text-white">@User.Identity.Name</h5>
+                           
                         </div>
                     </div>
                 </div>
@@ -206,6 +207,18 @@
         @RenderBody();
         <!-- end main content-->
 
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>document.write(new Date().getFullYear())</script> © Growpal
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
     </div>
     <!-- END layout-wrapper -->
 
@@ -216,7 +229,7 @@
             
                 <h5 class="m-0 me-2">Settings</h5>
 
-                <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                <a  class="right-bar-toggle ms-auto">
                     <i class="mdi mdi-close noti-icon"></i>
                 </a>
             </div>
@@ -248,6 +261,20 @@
     <script src="~/admin/assets/js/app.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+
+
+    <!-- twitter-bootstrap-wizard js -->
+    <script src="~/admin/assets/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+
+    <script src="~/admin/assets/libs/twitter-bootstrap-wizard/prettify.js"></script>
+
+    <!-- select 2 plugin -->
+    <script src="~/admin/assets/libs/select2/js/select2.min.js"></script>
+
+    <!-- dropzone plugin -->
+    <script src="~/admin/assets/libs/dropzone/min/dropzone.min.js"></script>
+    <!-- init js -->
+    <script src="~/admin/assets/js/pages/ecommerce-add-product.init.js"></script>
 
 </body>
 
